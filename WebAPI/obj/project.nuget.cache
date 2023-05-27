@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "dgSpecHash": "nsavJJfCI/q72gBv0I46qFaqDBaWDNODWcIxkDxj4ww05yixkq9eZp8/TfrMmQeD4X0Gxu6BhAyQgWHzUvggNA==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\WebAPI\\WebAPI.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Shared no es compatible con netcoreapp1.1 (.NETCoreApp,Version=v1.1). El proyecto Shared admite: netcoreapp3.1 (.NETCoreApp,Version=v3.1)",
+      "libraryId": "Shared",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v1.1"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Persistence no es compatible con netcoreapp1.1 (.NETCoreApp,Version=v1.1). El proyecto Persistence admite: netcoreapp3.1 (.NETCoreApp,Version=v3.1)",
+      "libraryId": "Persistence",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v1.1"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Application no es compatible con netcoreapp1.1 (.NETCoreApp,Version=v1.1). El proyecto Application admite: netcoreapp3.1 (.NETCoreApp,Version=v3.1)",
+      "libraryId": "Application",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v1.1"
+      ]
+    }
+  ]
+}

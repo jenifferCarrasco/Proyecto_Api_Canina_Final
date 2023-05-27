@@ -1,0 +1,10 @@
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\bin\Debug\netcoreapp3.1\DOMAIN.Canina.deps.json
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\bin\Debug\netcoreapp3.1\DOMAIN.Canina.dll
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\bin\Debug\netcoreapp3.1\DOMAIN.Canina.pdb
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\obj\Debug\netcoreapp3.1\DOMAIN.Canina.csproj.AssemblyReference.cache
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\obj\Debug\netcoreapp3.1\DOMAIN.Canina.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\obj\Debug\netcoreapp3.1\DOMAIN.Canina.AssemblyInfoInputs.cache
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\obj\Debug\netcoreapp3.1\DOMAIN.Canina.AssemblyInfo.cs
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\obj\Debug\netcoreapp3.1\DOMAIN.Canina.csproj.CoreCompileInputs.cache
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\obj\Debug\netcoreapp3.1\DOMAIN.Canina.dll
+C:\Users\toshiba\source\repos\BancoCursoRESTful\DOMAIN.Canina\obj\Debug\netcoreapp3.1\DOMAIN.Canina.pdb

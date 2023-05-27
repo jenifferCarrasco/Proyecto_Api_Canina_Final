@@ -1,0 +1,10 @@
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\bin\Debug\netcoreapp3.1\Application.deps.json
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\bin\Debug\netcoreapp3.1\Application.dll
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\bin\Debug\netcoreapp3.1\Application.pdb
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\obj\Debug\netcoreapp3.1\Application.csproj.AssemblyReference.cache
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\obj\Debug\netcoreapp3.1\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\obj\Debug\netcoreapp3.1\Application.AssemblyInfoInputs.cache
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\obj\Debug\netcoreapp3.1\Application.AssemblyInfo.cs
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\obj\Debug\netcoreapp3.1\Application.csproj.CoreCompileInputs.cache
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\obj\Debug\netcoreapp3.1\Application.dll
+C:\Users\toshiba\source\repos\BancoCursoRESTful\Application\obj\Debug\netcoreapp3.1\Application.pdb
