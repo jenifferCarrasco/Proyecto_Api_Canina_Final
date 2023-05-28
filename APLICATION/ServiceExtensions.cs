@@ -2,14 +2,11 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace Application
 {
-    public static class ServiceExtensions
+	public static class ServiceExtensions
     {
         public static void AddAplicationLayer(this IServiceCollection service) {
 
@@ -18,9 +15,6 @@ namespace Application
             service.AddMediatR(Assembly.GetExecutingAssembly());
             service.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavieour<,>));
 
-
         }
-
-
     }
 }

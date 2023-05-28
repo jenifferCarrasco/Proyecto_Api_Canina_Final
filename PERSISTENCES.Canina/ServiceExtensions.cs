@@ -15,12 +15,11 @@ using Persistence.Context;
 using Persistence.Repository;
 using PERSISTENCES.Canina.Services;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Persistence
 {
-    public static class ServiceExtensions
+	public static class ServiceExtensions
     {
         public static void AddPersistenceInfraestructure(this IServiceCollection service, IConfiguration configuration)
         {

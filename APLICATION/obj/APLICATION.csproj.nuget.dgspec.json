@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\APLICATION\\APLICATION.csproj": {}
+    "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\APLICATION\\APLICATION.csproj": {}
   },
   "projects": {
-    "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\APLICATION\\APLICATION.csproj": {
+    "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\APLICATION\\APLICATION.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\APLICATION\\APLICATION.csproj",
+        "projectUniqueName": "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\APLICATION\\APLICATION.csproj",
         "projectName": "APLICATION",
-        "projectPath": "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\APLICATION\\APLICATION.csproj",
-        "packagesPath": "C:\\Users\\toshiba\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\APLICATION\\obj\\",
+        "projectPath": "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\APLICATION\\APLICATION.csproj",
+        "packagesPath": "C:\\Users\\jeyso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\APLICATION\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\toshiba\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\jeyso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -32,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\DOMAIN.Canina\\DOMAIN.Canina.csproj": {
-                "projectPath": "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\DOMAIN.Canina\\DOMAIN.Canina.csproj"
+              "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\DOMAIN.Canina\\DOMAIN.Canina.csproj": {
+                "projectPath": "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\DOMAIN.Canina\\DOMAIN.Canina.csproj"
               }
             }
           }
@@ -99,7 +95,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -108,25 +105,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\DOMAIN.Canina\\DOMAIN.Canina.csproj": {
+    "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\DOMAIN.Canina\\DOMAIN.Canina.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\DOMAIN.Canina\\DOMAIN.Canina.csproj",
+        "projectUniqueName": "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\DOMAIN.Canina\\DOMAIN.Canina.csproj",
         "projectName": "DOMAIN.Canina",
-        "projectPath": "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\DOMAIN.Canina\\DOMAIN.Canina.csproj",
-        "packagesPath": "C:\\Users\\toshiba\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\toshiba\\source\\repos\\BancoCursoRESTful\\DOMAIN.Canina\\obj\\",
+        "projectPath": "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\DOMAIN.Canina\\DOMAIN.Canina.csproj",
+        "packagesPath": "C:\\Users\\jeyso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jeyso\\OneDrive\\Documents\\Proyecto_Api_Canina_Final\\DOMAIN.Canina\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\toshiba\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\jeyso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -171,7 +164,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -180,7 +174,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

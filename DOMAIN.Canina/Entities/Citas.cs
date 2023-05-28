@@ -8,7 +8,6 @@ namespace DOMAIN.Canina.Entities
 {
     public class Citas : AuditableBaseEntity
     {
-        
         public string CentroId { get; set; }
         public Centros Centro { get; set; }
         public string VacunadorId { get; set; }

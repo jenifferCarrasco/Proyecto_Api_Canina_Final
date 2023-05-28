@@ -27,37 +27,36 @@ namespace PERSISTENCES.Canina.Services
         private readonly RoleManager<Usuarios> _roleManage;
         private readonly SignInManager<Usuarios> _singInManage;
         private readonly JWTSetting _jwtSetting;
-        private readonly IDateTimeService _dateTimeService;
 
-        public AccountService(UserManager<Usuarios> userManage, RoleManager<Usuarios> roleManage = null, IOptions<JWTSetting> jwtSetting = null, IDateTimeService dateTimeService = null, SignInManager<Usuarios> singInManage = null)
+        public AccountService(UserManager<Usuarios> userManage, RoleManager<Usuarios> roleManage = null, IOptions<JWTSetting> jwtSetting = null ,SignInManager<Usuarios> singInManage = null)
         {
             _userManage = userManage;
             _roleManage = roleManage;
             _jwtSetting = jwtSetting.Value;
-            _dateTimeService = dateTimeService;
             _singInManage = singInManage;
         }
 
         public async Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, string ipAddress)
         {
-            var usuario = await _userManage.FindByEmailAsync(request.Email);
-            if (usuario == null) {
-                throw new ApiException($"No existe una cuenta registrada con el Email {request.Email}.");
-            }
-            var result = await _singInManage.PasswordSignInAsync(usuario.UserName, request.Password,
+            var usuario = await _userManage.FindByEmailAsync(request.Email)
+                ?? throw new ApiException($"No existe una cuenta registrada con el Email {request.Email}.");
+
+			var result = await _singInManage.PasswordSignInAsync(usuario.UserName, request.Password,
                 false, lockoutOnFailure:false);
             if (!result.Succeeded) {
                 throw new ApiException($"Usuario o contraseña incorrecta!");
             }
 
             JwtSecurityToken jwtSecurityToken = await GenerateJWToken(usuario);
-            AuthenticationResponse response = new AuthenticationResponse();
-            response.Id = usuario.Id;
-            response.JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            response.Email = usuario.Email;
-            response.UserName = usuario.UserName;
+			AuthenticationResponse response = new AuthenticationResponse
+			{
+				Id = usuario.Id,
+				JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+				Email = usuario.Email,
+				UserName = usuario.UserName
+			};
 
-            var rolesLiat = await _userManage.GetRolesAsync(usuario).ConfigureAwait(false);
+			var rolesLiat = await _userManage.GetRolesAsync(usuario).ConfigureAwait(false);
             response.Roles = rolesLiat.ToList();
             response.IsVerified = usuario.EmailConfirmed;
 
