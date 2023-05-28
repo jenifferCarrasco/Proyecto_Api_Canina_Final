@@ -7,22 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PERSISTENCES.Canina.Seeds
+namespace PERSISTENCE.Canina.Seeds
 {
-    public static class DefaultVacunadorUser
+    public static class DefaultPacienteUser
     {
         public static async Task SeedAsync(UserManager<Usuarios> userManager, RoleManager<IdentityRole> roleManager)
         {
             var defaultUser = new Usuarios
             {
-                Vacunadores = new Vacunadores
-                {
+                Propietario = new Propietarios {
 
                     Nombre = "Jeniffer",
                     Apellido = "Carrasco",
-                    Cedula = "403-1109873-5",
-                    Direccion = "Santo Domingo Norte",
-                    Telefono = "829-765-4587"
+                    Cedula = "402-1109873-4",
+                    Direccion = "Santo Domingo Este",
+                    Telefono = "809-765-4562"
 
                 },
                 Nombre = "Jeniffer",
@@ -40,10 +39,11 @@ namespace PERSISTENCES.Canina.Seeds
                 if (user == null)
                 {
                     await userManager.CreateAsync(defaultUser, "S3v3r1na");
-                    await userManager.AddToRoleAsync(defaultUser, Roles.Vacunador.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Roles.Paciente.ToString());
 
                 }
             }
         }
+
     }
 }

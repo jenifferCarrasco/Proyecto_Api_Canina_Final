@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PERSISTENCES.Canina.Configuration
+namespace PERSISTENCE.Canina.Configuration
 {
-
-    public class VacunadoresConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Vacunadores>
+    public class PropietarioConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Propietarios>
     {
-        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Vacunadores> builder)
+        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Propietarios> builder)
         {
-            builder.ToTable("Vacunadores");
+            builder.ToTable("Propietarios");
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Nombre)
                 .HasMaxLength(80)

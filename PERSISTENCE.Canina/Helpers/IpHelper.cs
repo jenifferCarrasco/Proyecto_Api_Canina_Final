@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace PERSISTENCES.Canina.Helpers
+namespace PERSISTENCE.Canina.Helpers
 {
     public class IpHelper
     {

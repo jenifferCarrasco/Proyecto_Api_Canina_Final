@@ -11,13 +11,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using Persistence.Context;
-using Persistence.Repository;
-using PERSISTENCES.Canina.Services;
+using PERSISTENCE.Canina.Context;
+using PERSISTENCE.Canina.Repository;
+using PERSISTENCE.Canina.Services;
 using System;
 using System.Text;
 
-namespace Persistence
+namespace PERSISTENCE.Canina
 {
 	public static class ServiceExtensions
     {
@@ -42,14 +42,14 @@ namespace Persistence
                .AddEntityFrameworkStores<ApplicationDbContext>()
                .AddDefaultTokenProviders();
             #region Repositories
-            service.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
+            //service.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
             #endregion
 
-            #region Caching
-            service.AddStackExchangeRedisCache(options => {
-                options.Configuration = configuration.GetValue<string>("Caching:RedisConnection");
-            });
-            #endregion
+            //#region Caching
+            //service.AddStackExchangeRedisCache(options => {
+            //    options.Configuration = configuration.GetValue<string>("Caching:RedisConnection");
+            //});
+            //#endregion
             #region Services
             service.AddTransient<IAccountService, AccountService>();
             #endregion

@@ -7,21 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PERSISTENCES.Canina.Seeds
+namespace PERSISTENCE.Canina.Seeds
 {
-    public static class DefaultAdminUser
+    public static class DefaultVacunadorUser
     {
-        public static async Task SeedAsync(UserManager<Usuarios> userManager,RoleManager<IdentityRole> roleManager)
+        public static async Task SeedAsync(UserManager<Usuarios> userManager, RoleManager<IdentityRole> roleManager)
         {
             var defaultUser = new Usuarios
             {
-                Administradores = new List<Administradores> {
+                Vacunadores = new Vacunadores
+                {
 
-                    new Administradores {
-                        Nombre = "Jeniffer",
-                        Apellido = "Carrasco",
-
-                    }
+                    Nombre = "Jeniffer",
+                    Apellido = "Carrasco",
+                    Cedula = "403-1109873-5",
+                    Direccion = "Santo Domingo Norte",
+                    Telefono = "829-765-4587"
 
                 },
                 Nombre = "Jeniffer",
@@ -32,13 +33,14 @@ namespace PERSISTENCES.Canina.Seeds
                 PhoneNumberConfirmed = true
             };
 
-            if (userManager.Users.All(u => u.Id != defaultUser.Id)) {
+            if (userManager.Users.All(u => u.Id != defaultUser.Id))
+            {
 
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
-                if (user == null) {
+                if (user == null)
+                {
                     await userManager.CreateAsync(defaultUser, "S3v3r1na");
-                    await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());
-                 
+                    await userManager.AddToRoleAsync(defaultUser, Roles.Vacunador.ToString());
 
                 }
             }

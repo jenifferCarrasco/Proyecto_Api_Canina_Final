@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PERSISTENCES.Canina.Configuration
+namespace PERSISTENCE.Canina.Configuration
 {
     public class CitaConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Citas>
     {

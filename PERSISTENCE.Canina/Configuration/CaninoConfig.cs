@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PERSISTENCES.Canina.Configuration
+namespace PERSISTENCE.Canina.Configuration
 {
     public class CaninoConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Caninos>
     {

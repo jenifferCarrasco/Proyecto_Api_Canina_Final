@@ -3,12 +3,12 @@ using APLICATION.Enum;
 using APLICATION.Exceptions;
 using APLICATION.Interface;
 using APLICATION.Wrappers;
-using Application.Interface;
+using DOMAIN.Canina.Entities;
 using DOMAIN.Canina.Setting;
-using PERSISTENCES.Canina.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using PERSISTENCE.Canina.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,11 +17,10 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using DOMAIN.Canina.Entities;
 
-namespace PERSISTENCES.Canina.Services
+namespace PERSISTENCE.Canina.Services
 {
-    public class AccountService : IAccountService
+	public class AccountService : IAccountService
     {
         private readonly UserManager<Usuarios> _userManage;
         private readonly RoleManager<Usuarios> _roleManage;

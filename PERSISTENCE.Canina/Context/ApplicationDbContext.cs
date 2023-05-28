@@ -1,18 +1,15 @@
 ﻿using Application.Interface;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using DOMAIN.Canina.Entities;
 using DOMAIN.Common;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace Persistence.Context
+namespace PERSISTENCE.Canina.Context
 {
-    public class ApplicationDbContext : IdentityDbContext<Usuarios>
+	public class ApplicationDbContext : IdentityDbContext<Usuarios>
     {
         private readonly IDateTimeService _dateTime;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDateTimeService dateTime) : base (options)

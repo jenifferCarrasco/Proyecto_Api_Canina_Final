@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Persistence.Context;
+using PERSISTENCE.Canina.Context;
 
-namespace PERSISTENCES.Canina.Migrations
+namespace PERSISTENCE.Canina.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230514225419_InitialMigration")]
-    partial class InitialMigration
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,7 +211,7 @@ namespace PERSISTENCES.Canina.Migrations
                     b.ToTable("Citas");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Propietarios", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Moderadores", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -222,16 +220,10 @@ namespace PERSISTENCES.Canina.Migrations
                     b.Property<string>("Apellido")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Cedula")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModified")
@@ -243,8 +235,60 @@ namespace PERSISTENCES.Canina.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Moderadores");
+                });
+
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Propietarios", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("Cedula")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
 
                     b.Property<string>("UsuarioId")
                         .HasColumnType("nvarchar(450)");
@@ -266,6 +310,9 @@ namespace PERSISTENCES.Canina.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Apellido")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -282,6 +329,9 @@ namespace PERSISTENCES.Canina.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -402,33 +452,52 @@ namespace PERSISTENCES.Canina.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("Cedula")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId")
+                        .IsUnique()
+                        .HasFilter("[UsuarioId] IS NOT NULL");
 
                     b.ToTable("Vacunadores");
                 });
@@ -451,6 +520,12 @@ namespace PERSISTENCES.Canina.Migrations
                         .HasMaxLength(350)
                         .HasColumnType("nvarchar(350)");
 
+                    b.Property<int>("Estatus")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaCaducidad")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Laboratorio")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -462,6 +537,9 @@ namespace PERSISTENCES.Canina.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Lote")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -643,6 +721,15 @@ namespace PERSISTENCES.Canina.Migrations
                     b.Navigation("Vacunador");
                 });
 
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Moderadores", b =>
+                {
+                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", "Usuario")
+                        .WithMany("Moderadores")
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("DOMAIN.Canina.Entities.Propietarios", b =>
                 {
                     b.HasOne("DOMAIN.Canina.Entities.Usuarios", "Usuario")
@@ -677,6 +764,15 @@ namespace PERSISTENCES.Canina.Migrations
                     b.Navigation("Vacuna");
 
                     b.Navigation("Vacunador");
+                });
+
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunadores", b =>
+                {
+                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", "Usuario")
+                        .WithOne("Vacunadores")
+                        .HasForeignKey("DOMAIN.Canina.Entities.Vacunadores", "UsuarioId");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -753,7 +849,11 @@ namespace PERSISTENCES.Canina.Migrations
                 {
                     b.Navigation("Administradores");
 
+                    b.Navigation("Moderadores");
+
                     b.Navigation("Propietario");
+
+                    b.Navigation("Vacunadores");
                 });
 
             modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunadores", b =>

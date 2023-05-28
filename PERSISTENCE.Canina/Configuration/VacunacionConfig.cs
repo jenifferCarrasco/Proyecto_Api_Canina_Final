@@ -5,7 +5,7 @@ using DOMAIN.Canina.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PERSISTENCES.Canina.Configuration
+namespace PERSISTENCE.Canina.Configuration
 {
     public class VacunacionConfig : IEntityTypeConfiguration<Vacunaciones>
     {

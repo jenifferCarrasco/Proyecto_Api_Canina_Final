@@ -5,7 +5,7 @@ using System.Text;
 using DOMAIN.Canina.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PERSISTENCES.Canina.Configuration
+namespace PERSISTENCE.Canina.Configuration
 {
     public class VacunaConfig : IEntityTypeConfiguration<Vacunas>
     {

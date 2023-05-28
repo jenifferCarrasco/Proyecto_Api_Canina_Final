@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Persistence.Context;
+using PERSISTENCE.Canina.Context;
 
-namespace PERSISTENCES.Canina.Migrations
+namespace PERSISTENCE.Canina.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230525015307_InitialMigration1")]
-    partial class InitialMigration1
+    [Migration("20230528230119_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,23 +1,21 @@
 ﻿using APLICATION.Enum;
 using DOMAIN.Canina.Entities;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace PERSISTENCES.Canina.Seeds
+namespace PERSISTENCE.Canina.Seeds
 {
-    public static class DefaultModeradorUser
+	public static class DefaultAdminUser
     {
-        public static async Task SeedAsync(UserManager<Usuarios> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedAsync(UserManager<Usuarios> userManager,RoleManager<IdentityRole> roleManager)
         {
             var defaultUser = new Usuarios
             {
-                Moderadores = new List<Moderadores> {
+                Administradores = new List<Administradores> {
 
-                    new Moderadores {
+                    new Administradores {
                         Nombre = "Jeniffer",
                         Apellido = "Carrasco",
 
@@ -26,20 +24,19 @@ namespace PERSISTENCES.Canina.Seeds
                 },
                 Nombre = "Jeniffer",
                 Apellido = "Carrasco",
-                UserName = "userAdmin1",
-                Email = "userAdmin@gmail.com1",
+                UserName = "userAdmin",
+                Email = "userAdmin@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
 
-            if (userManager.Users.All(u => u.Id != defaultUser.Id))
-            {
+            if (userManager.Users.All(u => u.Id != defaultUser.Id)) {
 
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
-                if (user == null)
-                {
+                if (user == null) {
                     await userManager.CreateAsync(defaultUser, "S3v3r1na");
-                    await userManager.AddToRoleAsync(defaultUser, Roles.Moderador.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());
+                 
 
                 }
             }
