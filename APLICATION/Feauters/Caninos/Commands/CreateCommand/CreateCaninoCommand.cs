@@ -25,10 +25,10 @@ namespace APLICATION.Feauters.Canino.Commands.CreateCommand
     }
     public class CreateCaninoCommandHandler : IRequestHandler<CreateCaninoCommand, Response<Guid>> {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Caninos> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Canino> _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public CreateCaninoCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Caninos> repositoryAsync, IMapper mapper = null)
+        public CreateCaninoCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Canino> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;
@@ -37,7 +37,7 @@ namespace APLICATION.Feauters.Canino.Commands.CreateCommand
 
         public async Task<Response<Guid>> Handle(CreateCaninoCommand request, CancellationToken cancellationToken)
         {
-            var newRegister = _mapper.Map<DOMAIN.Canina.Entities.Caninos>(request);
+            var newRegister = _mapper.Map<DOMAIN.Canina.Entities.Canino>(request);
             var data = await _repositoryAsync.AddAsync(newRegister);
 
             return new Response<Guid>(data.Id);

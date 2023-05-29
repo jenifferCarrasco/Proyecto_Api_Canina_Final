@@ -15,7 +15,7 @@ namespace APLICATION.DTOs
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public string UsuarioId { get; set; }
-        public Usuarios Usuario { get; set; }
-        public ICollection<Vacunaciones> Vacunaciones { get; set; }
+        public Usuario Usuario { get; set; }
+        public ICollection<Vacunacion> Vacunaciones { get; set; }
     }
 }

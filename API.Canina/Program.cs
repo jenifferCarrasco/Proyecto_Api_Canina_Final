@@ -19,14 +19,12 @@ namespace API.Canina
 				var services = scope.ServiceProvider;
 				try
 				{
-					var userManager = services.GetRequiredService<UserManager<Usuarios>>();
+					var userManager = services.GetRequiredService<UserManager<Usuario>>();
 					var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-					await DefaultRoles.SeedAsync(userManager, roleManager);
-					await DefaultAdminUser.SeedAsync(userManager, roleManager);
-					await DefaultModeradorUser.SeedAsync(userManager, roleManager);
-					await DefaultVacunadorUser.SeedAsync(userManager, roleManager);
-					await DefaultPacienteUser.SeedAsync(userManager, roleManager);
+					await DefaultRoles.SeedAsync(roleManager);
+					await DefaultAdminUser.SeedAsync(userManager);
+					await DefaultPacienteUser.SeedAsync(userManager);
 				}
 				catch (Exception)
 				{

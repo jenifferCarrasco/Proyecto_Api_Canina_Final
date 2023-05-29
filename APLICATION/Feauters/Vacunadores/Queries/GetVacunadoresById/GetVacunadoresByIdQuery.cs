@@ -18,10 +18,10 @@ namespace APLICATION.Feauters.Vacunadores.Queries.GetVacunadoresById
         public class GetVacunadoresByIdQueryHandler : IRequestHandler<GetVacunadoresByIdQuery, Response<VacunadoresDto>>
         {
 
-            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunadores> _repositoryAsync;
+            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunador> _repositoryAsync;
             private readonly IMapper _mapper;
 
-            public GetVacunadoresByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunadores> repositoryAsync, IMapper mapper)
+            public GetVacunadoresByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunador> repositoryAsync, IMapper mapper)
             {
                 _repositoryAsync = repositoryAsync;
                 _mapper = mapper;

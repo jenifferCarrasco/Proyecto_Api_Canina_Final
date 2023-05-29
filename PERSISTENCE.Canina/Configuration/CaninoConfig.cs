@@ -6,9 +6,9 @@ using System.Text;
 
 namespace PERSISTENCE.Canina.Configuration
 {
-    public class CaninoConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Caninos>
+    public class CaninoConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Canino>
     {
-        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Caninos> builder)
+        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Canino> builder)
         {
             builder.ToTable("Caninos");
             builder.HasKey(p => p.Id);
@@ -27,7 +27,6 @@ namespace PERSISTENCE.Canina.Configuration
                 .HasMaxLength(10)
                 .IsRequired();
             builder.Property(p => p.Estatus);
-            builder.Property(p => p.PropietarioId);
             builder.Property(p => p.CreatedBy)
                 .HasMaxLength(30);
             builder.Property(p => p.LastModifiedBy)

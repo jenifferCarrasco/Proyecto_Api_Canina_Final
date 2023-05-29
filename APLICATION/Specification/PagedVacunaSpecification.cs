@@ -6,7 +6,7 @@ using System.Text;
 
 namespace APLICATION.Specification
 {
-    public class PagedVacunaSpecification : Specification<Vacunas>
+    public class PagedVacunaSpecification : Specification<Vacuna>
     {
         public PagedVacunaSpecification(int pageSize, int pageNumber, string nombre, string lab)
         {

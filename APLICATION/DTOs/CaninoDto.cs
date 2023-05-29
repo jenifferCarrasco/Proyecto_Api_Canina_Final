@@ -18,10 +18,10 @@ namespace APLICATION.DTOs
         public string Color { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string PropietarioId { get; set; }
-        public Propietarios Propietario { get; set; }
+        public Propietario Propietario { get; set; }
         public Estados Estatus { get; set; }
-        public virtual ICollection<Vacunaciones> Vacunaciones { get; set; }
-        public virtual ICollection<Citas> Citas { get; set; }
+        public virtual ICollection<Vacunacion> Vacunaciones { get; set; }
+        public virtual ICollection<Cita> Citas { get; set; }
 
 
 

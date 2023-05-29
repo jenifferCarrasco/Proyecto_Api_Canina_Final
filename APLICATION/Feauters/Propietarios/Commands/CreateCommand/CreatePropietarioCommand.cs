@@ -26,10 +26,10 @@ namespace APLICATION.Feauters.Propietarios.Commands.CreateCommand
     public class CreatePropietarioCommandHandler : IRequestHandler<CreatePropietarioCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Propietarios> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Propietario> _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public CreatePropietarioCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Propietarios> repositoryAsync, IMapper mapper = null)
+        public CreatePropietarioCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Propietario> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;
@@ -38,7 +38,7 @@ namespace APLICATION.Feauters.Propietarios.Commands.CreateCommand
 
         public async Task<Response<Guid>> Handle(CreatePropietarioCommand request, CancellationToken cancellationToken)
         {
-            var newRegister = _mapper.Map<DOMAIN.Canina.Entities.Propietarios>(request);
+            var newRegister = _mapper.Map<DOMAIN.Canina.Entities.Propietario>(request);
             var data = await _repositoryAsync.AddAsync(newRegister);
 
             return new Response<Guid>(data.Id);

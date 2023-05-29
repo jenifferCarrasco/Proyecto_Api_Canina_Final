@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace PERSISTENCE.Canina.Configuration
 {
-    public class VacunaConfig : IEntityTypeConfiguration<Vacunas>
+    public class VacunaConfig : IEntityTypeConfiguration<Vacuna>
     {
-        public void Configure(EntityTypeBuilder<Vacunas> builder)
+        public void Configure(EntityTypeBuilder<Vacuna> builder)
         {
             builder.ToTable("Vacunas");
             builder.HasKey(p => p.Id);

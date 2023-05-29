@@ -21,10 +21,10 @@ namespace APLICATION.Feauters.Centros.Commands.UpdateCentroCommand
     public class UpdateCentroCommandHandler : IRequestHandler<UpdateCentroCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Centros> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Centro> _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public UpdateCentroCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Centros> repositoryAsync, IMapper mapper = null)
+        public UpdateCentroCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Centro> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

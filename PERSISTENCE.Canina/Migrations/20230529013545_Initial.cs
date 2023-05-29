@@ -26,9 +26,7 @@ namespace PERSISTENCE.Canina.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Roles = table.Column<int>(type: "int", nullable: false),
+                    TipoUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -65,6 +63,26 @@ namespace PERSISTENCE.Canina.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Centros", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vacunadores",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Cedula = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    Direccion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vacunadores", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -219,30 +237,6 @@ namespace PERSISTENCE.Canina.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Moderadores",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Moderadores", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Moderadores_AspNetUsers_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Propietarios",
                 columns: table => new
                 {
@@ -270,33 +264,6 @@ namespace PERSISTENCE.Canina.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vacunadores",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    Apellido = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    Cedula = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
-                    Direccion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
-                    UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vacunadores", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Vacunadores_AspNetUsers_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Caninos",
                 columns: table => new
                 {
@@ -307,8 +274,7 @@ namespace PERSISTENCE.Canina.Migrations
                     Peso = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Color = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PropietarioId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PropietarioId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PropietarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Estatus = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -319,11 +285,11 @@ namespace PERSISTENCE.Canina.Migrations
                 {
                     table.PrimaryKey("PK_Caninos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Caninos_Propietarios_PropietarioId1",
-                        column: x => x.PropietarioId1,
+                        name: "FK_Caninos_Propietarios_PropietarioId",
+                        column: x => x.PropietarioId,
                         principalTable: "Propietarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -331,12 +297,9 @@ namespace PERSISTENCE.Canina.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CentroId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CentroId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    VacunadorId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VacunadorId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CaninoId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CaninoId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CentroId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    VacunadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CaninoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Estatus = table.Column<int>(type: "int", nullable: false),
                     FechaCita = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
@@ -348,23 +311,23 @@ namespace PERSISTENCE.Canina.Migrations
                 {
                     table.PrimaryKey("PK_Citas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Citas_Caninos_CaninoId1",
-                        column: x => x.CaninoId1,
+                        name: "FK_Citas_Caninos_CaninoId",
+                        column: x => x.CaninoId,
                         principalTable: "Caninos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Citas_Centros_CentroId1",
-                        column: x => x.CentroId1,
+                        name: "FK_Citas_Centros_CentroId",
+                        column: x => x.CentroId,
                         principalTable: "Centros",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Citas_Vacunadores_VacunadorId1",
-                        column: x => x.VacunadorId1,
+                        name: "FK_Citas_Vacunadores_VacunadorId",
+                        column: x => x.VacunadorId,
                         principalTable: "Vacunadores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -372,14 +335,10 @@ namespace PERSISTENCE.Canina.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CentroId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CentroId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    VacunadorId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VacunadorId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    VacunaId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VacunaId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CaninoId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CaninoId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CentroId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    VacunadorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    VacunaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CaninoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Dosis = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     FechaProxima = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
@@ -391,35 +350,37 @@ namespace PERSISTENCE.Canina.Migrations
                 {
                     table.PrimaryKey("PK_Vacunaciones", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vacunaciones_Caninos_CaninoId1",
-                        column: x => x.CaninoId1,
+                        name: "FK_Vacunaciones_Caninos_CaninoId",
+                        column: x => x.CaninoId,
                         principalTable: "Caninos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vacunaciones_Centros_CentroId1",
-                        column: x => x.CentroId1,
+                        name: "FK_Vacunaciones_Centros_CentroId",
+                        column: x => x.CentroId,
                         principalTable: "Centros",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vacunaciones_Vacunadores_VacunadorId1",
-                        column: x => x.VacunadorId1,
+                        name: "FK_Vacunaciones_Vacunadores_VacunadorId",
+                        column: x => x.VacunadorId,
                         principalTable: "Vacunadores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vacunaciones_Vacunas_VacunaId1",
-                        column: x => x.VacunaId1,
+                        name: "FK_Vacunaciones_Vacunas_VacunaId",
+                        column: x => x.VacunaId,
                         principalTable: "Vacunas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Administradores_UsuarioId",
                 table: "Administradores",
-                column: "UsuarioId");
+                column: "UsuarioId",
+                unique: true,
+                filter: "[UsuarioId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -461,29 +422,24 @@ namespace PERSISTENCE.Canina.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Caninos_PropietarioId1",
+                name: "IX_Caninos_PropietarioId",
                 table: "Caninos",
-                column: "PropietarioId1");
+                column: "PropietarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Citas_CaninoId1",
+                name: "IX_Citas_CaninoId",
                 table: "Citas",
-                column: "CaninoId1");
+                column: "CaninoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Citas_CentroId1",
+                name: "IX_Citas_CentroId",
                 table: "Citas",
-                column: "CentroId1");
+                column: "CentroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Citas_VacunadorId1",
+                name: "IX_Citas_VacunadorId",
                 table: "Citas",
-                column: "VacunadorId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Moderadores_UsuarioId",
-                table: "Moderadores",
-                column: "UsuarioId");
+                column: "VacunadorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Propietarios_UsuarioId",
@@ -493,31 +449,24 @@ namespace PERSISTENCE.Canina.Migrations
                 filter: "[UsuarioId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vacunaciones_CaninoId1",
+                name: "IX_Vacunaciones_CaninoId",
                 table: "Vacunaciones",
-                column: "CaninoId1");
+                column: "CaninoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vacunaciones_CentroId1",
+                name: "IX_Vacunaciones_CentroId",
                 table: "Vacunaciones",
-                column: "CentroId1");
+                column: "CentroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vacunaciones_VacunadorId1",
+                name: "IX_Vacunaciones_VacunadorId",
                 table: "Vacunaciones",
-                column: "VacunadorId1");
+                column: "VacunadorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vacunaciones_VacunaId1",
+                name: "IX_Vacunaciones_VacunaId",
                 table: "Vacunaciones",
-                column: "VacunaId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vacunadores_UsuarioId",
-                table: "Vacunadores",
-                column: "UsuarioId",
-                unique: true,
-                filter: "[UsuarioId] IS NOT NULL");
+                column: "VacunaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -542,9 +491,6 @@ namespace PERSISTENCE.Canina.Migrations
 
             migrationBuilder.DropTable(
                 name: "Citas");
-
-            migrationBuilder.DropTable(
-                name: "Moderadores");
 
             migrationBuilder.DropTable(
                 name: "Vacunaciones");

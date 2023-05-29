@@ -16,10 +16,10 @@ namespace APLICATION.Feauters.Vacunas.Queries.GetVacunaById
         public Guid Id { get; set; }
         public class GetVacunaByIdQueryHandler : IRequestHandler<GetVacunaByIdQuery, Response<VacunasDto>> {
 
-            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunas> _repositoryAsync;
+            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacuna> _repositoryAsync;
             private readonly IMapper _mapper;
 
-            public GetVacunaByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunas> repositoryAsync, IMapper mapper)
+            public GetVacunaByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacuna> repositoryAsync, IMapper mapper)
             {
                 _repositoryAsync = repositoryAsync;
                 _mapper = mapper;

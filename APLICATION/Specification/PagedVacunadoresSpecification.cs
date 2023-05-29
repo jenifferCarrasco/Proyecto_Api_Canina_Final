@@ -5,7 +5,7 @@ using DOMAIN.Canina.Entities;
 namespace APLICATION.Specification
 {
 
-    public class PagedVacunadoresSpecification : Specification<Vacunadores>
+    public class PagedVacunadoresSpecification : Specification<Vacunador>
     {
         public PagedVacunadoresSpecification(int pageSize, int pageNumber, string nombre, string cedula)
         {

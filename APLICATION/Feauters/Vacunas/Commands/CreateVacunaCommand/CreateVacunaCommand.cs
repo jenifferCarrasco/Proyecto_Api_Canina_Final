@@ -23,10 +23,10 @@ namespace APLICATION.Feauters.Vacunas.Commands.CreateVacunaCommand
     }
     public class CreateVacunaCommandHandler : IRequestHandler<CreateVacunaCommand, Response<Guid>> {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunas> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacuna> _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public CreateVacunaCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunas> repositoryAsync, IMapper mapper = null)
+        public CreateVacunaCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacuna> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;
@@ -35,7 +35,7 @@ namespace APLICATION.Feauters.Vacunas.Commands.CreateVacunaCommand
 
         public async Task<Response<Guid>> Handle(CreateVacunaCommand request, CancellationToken cancellationToken)
         {
-            var newRegister = _mapper.Map<DOMAIN.Canina.Entities.Vacunas>(request);
+            var newRegister = _mapper.Map<DOMAIN.Canina.Entities.Vacuna>(request);
             var data = await _repositoryAsync.AddAsync(newRegister);
 
             return new Response<Guid>(data.Id);

@@ -1,11 +1,9 @@
 ﻿using DOMAIN.Common;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DOMAIN.Canina.Entities
 {
-    public class Vacunadores: AuditableBaseEntity
+	public class Propietario: AuditableBaseEntity
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -13,7 +11,7 @@ namespace DOMAIN.Canina.Entities
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public string UsuarioId { get; set; }
-        public Usuarios Usuario { get; set; }
-        public ICollection<Vacunaciones> Vacunaciones { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        public virtual ICollection<Canino> Caninos { get; set; }
     }
 }

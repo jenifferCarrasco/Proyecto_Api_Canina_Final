@@ -11,9 +11,9 @@ namespace APLICATION.DTOs
         public string Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public Rol Roles { get; set; }
+        public UserType Roles { get; set; }
 
-        public ICollection<Administradores> Administradores { get; set; }
-        public Propietarios Propietario { get; set; }
+        public ICollection<Administrador> Administradores { get; set; }
+        public Propietario Propietario { get; set; }
     }
 }

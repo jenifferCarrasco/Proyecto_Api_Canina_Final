@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PERSISTENCE.Canina;
 using Shared;
+using System.Reflection;
 
 namespace API.Canina
 {
@@ -28,14 +29,12 @@ namespace API.Canina
 			services.AddAplicationLayer();
 			services.AddSharedInfraestructure(Configuration);
 			services.AddPersistenceInfraestructure(Configuration);
-			services.AddMediatR(typeof(Startup));
 			services.AddControllers();
 			services.AddApiVersioningExtension();
 			services.AddValidatorsFromAssemblyContaining<Startup>();
 			services.AddControllers();
-			//services.AddDbContext<ApplicationDbContext>(options => {
-			//    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-			//});
+			services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api_Canina", Version = "v1" });

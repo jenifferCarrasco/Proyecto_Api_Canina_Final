@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace PERSISTENCE.Canina.Configuration
 {
-    public class PropietarioConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Propietarios>
+    public class PropietarioConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Propietario>
     {
-        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Propietarios> builder)
+        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Propietario> builder)
         {
             builder.ToTable("Propietarios");
             builder.HasKey(p => p.Id);

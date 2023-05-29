@@ -11,13 +11,13 @@ namespace APLICATION.DTOs
     {
         public string Id { get; set; }
         public string CentroId { get; set; }
-        public Centros Centro { get; set; }
+        public Centro Centro { get; set; }
         public string VacunadorId { get; set; }
-        public Vacunadores Vacunador { get; set; }
+        public Vacunador Vacunador { get; set; }
         public string VacunaId { get; set; }
-        public Vacunas Vacuna { get; set; }
+        public Vacuna Vacuna { get; set; }
         public string CaninoId { get; set; }
-        public Caninos Canino { get; set; }
+        public Canino Canino { get; set; }
         public string Dosis { get; set; }
         public DateTime FechaProxima { get; set; }
     }

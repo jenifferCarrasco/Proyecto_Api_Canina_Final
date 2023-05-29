@@ -6,7 +6,7 @@ using System.Text;
 
 namespace APLICATION.Specification
 {
-    public class PagedCentroSpecification : Specification<Centros>
+    public class PagedCentroSpecification : Specification<Centro>
     {
         public PagedCentroSpecification(int pageSize, int pageNumber, string nombre)
         {

@@ -17,10 +17,10 @@ namespace APLICATION.Feauters.Centros.Commands.DeleteCentroCommand
     public class DeleteCentroCommandHandler : IRequestHandler<DeleteCentroCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Centros> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Centro> _repositoryAsync;
 
 
-        public DeleteCentroCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Centros> repositoryAsync, IMapper mapper = null)
+        public DeleteCentroCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Centro> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
 

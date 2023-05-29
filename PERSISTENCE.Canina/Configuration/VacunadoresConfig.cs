@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace PERSISTENCE.Canina.Configuration
 {
 
-    public class VacunadoresConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Vacunadores>
+    public class VacunadoresConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Vacunador>
     {
-        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Vacunadores> builder)
+        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Vacunador> builder)
         {
             builder.ToTable("Vacunadores");
             builder.HasKey(p => p.Id);
@@ -25,7 +25,6 @@ namespace PERSISTENCE.Canina.Configuration
             builder.Property(p => p.Telefono)
                 .HasMaxLength(12)
                 .IsRequired();
-            builder.Property(p => p.UsuarioId);
             builder.Property(p => p.CreatedBy)
                 .HasMaxLength(30);
             builder.Property(p => p.LastModifiedBy)

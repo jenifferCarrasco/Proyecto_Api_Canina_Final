@@ -19,17 +19,15 @@ namespace API.Canina.Controllers
                 IpAddress = GenerateIPAddress()
             }));
         }
-        [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync(RegisterRequest request)
+        [HttpPost("admin")]
+        public async Task<IActionResult> AdminRegisterAsync(RegisterRequest request)
         {
             return Ok(await Mediator.Send(new RegisterCommand
             {
                 Nombre = request.Nombre,
                 Apellido = request.Apellido,
                 Email = request.Email,
-                //Cedula = request.Cedula,
-                //Direccion = request.Direccion,
-                Roles = request.Roles,
+                Rol = request.Rol,
                 Password = request.Password,
                 ConfirmPassword = request.ConfirmPassword,
                 UserName = request.UserName,

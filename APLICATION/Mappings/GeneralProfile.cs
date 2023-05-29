@@ -21,65 +21,65 @@ namespace APLICATION.Mappings
 
             //canino
             #region
-            CreateMap<Caninos, CaninoDto>();
+            CreateMap<Canino, CaninoDto>();
             #endregion
 
             #region Commands
-            CreateMap<CreateCaninoCommand, Caninos>();
+            CreateMap<CreateCaninoCommand, Canino>();
             #endregion
             //centro
             #region
-            CreateMap<Centros, CentrosDto>();
+            CreateMap<Centro, CentrosDto>();
             #endregion
 
             #region Commands
-            CreateMap<CreateCentroCommand, Centros>();
+            CreateMap<CreateCentroCommand, Centro>();
             #endregion
             //citas
             #region
-            CreateMap<Citas, CitasDto>();
+            CreateMap<Cita, CitasDto>();
             #endregion
 
             #region Commands
-            CreateMap<CreateCitaCommand, Citas>();
+            CreateMap<CreateCitaCommand, Cita>();
             #endregion
             //vacunaciones
             #region
-            CreateMap<Vacunaciones, VacunacionesDto>();
+            CreateMap<Vacunacion, VacunacionesDto>();
             #endregion
 
             #region Commands
-            CreateMap<CreateVacunacionCommand, Vacunaciones>();
+            CreateMap<CreateVacunacionCommand, Vacunacion>();
             #endregion
             //vacunas
             #region
-            CreateMap<Vacunas, VacunasDto>();
+            CreateMap<Vacuna, VacunasDto>();
             #endregion
 
             #region Commands
-            CreateMap<CreateVacunaCommand, Vacunas>();
+            CreateMap<CreateVacunaCommand, Vacuna>();
             #endregion
 
             #region 
-            CreateMap<Usuarios, UsuarioDto>();
+            CreateMap<Usuario, UsuarioDto>();
             #endregion
 
             //propietario
             #region
-            CreateMap<Propietarios, PropietariosDto>();
+            CreateMap<Propietario, PropietariosDto>();
             #endregion
 
             #region Commands
-            CreateMap<CreatePropietarioCommand,Propietarios>();
+            CreateMap<CreatePropietarioCommand,Propietario>();
             #endregion
 
             //vacunadores
             #region
-            CreateMap<Vacunadores, VacunadoresDto>();
+            CreateMap<Vacunador, VacunadoresDto>();
             #endregion
 
             #region Commands
-            CreateMap<CreateVacunadoresCommand, Vacunadores>();
+            CreateMap<CreateVacunadoresCommand, Vacunador>();
             #endregion
         }
     }

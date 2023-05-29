@@ -17,10 +17,10 @@ namespace APLICATION.Feauters.Citas.Commands.DeleteCitasCommand
     public class DeleteCitasCommandHandler : IRequestHandler<DeleteCitasCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Citas> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Cita> _repositoryAsync;
 
 
-        public DeleteCitasCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Citas> repositoryAsync, IMapper mapper = null)
+        public DeleteCitasCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Cita> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
 

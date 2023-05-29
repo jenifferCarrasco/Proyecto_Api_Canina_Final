@@ -26,7 +26,7 @@ namespace PERSISTENCE.Canina
             service.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-            service.AddIdentity<Usuarios, IdentityRole>(
+            service.AddIdentity<Usuario, IdentityRole>(
                 cfg =>
                 {
                     cfg.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
@@ -42,14 +42,15 @@ namespace PERSISTENCE.Canina
                .AddEntityFrameworkStores<ApplicationDbContext>()
                .AddDefaultTokenProviders();
             #region Repositories
-            //service.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
+            service.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
             #endregion
 
-            //#region Caching
-            //service.AddStackExchangeRedisCache(options => {
-            //    options.Configuration = configuration.GetValue<string>("Caching:RedisConnection");
-            //});
-            //#endregion
+            #region Caching
+            service.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = configuration.GetValue<string>("Caching:RedisConnection");
+            });
+            #endregion
             #region Services
             service.AddTransient<IAccountService, AccountService>();
             #endregion

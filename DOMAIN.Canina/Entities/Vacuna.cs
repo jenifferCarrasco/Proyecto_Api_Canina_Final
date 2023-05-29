@@ -1,11 +1,9 @@
 ﻿using DOMAIN.Common;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DOMAIN.Canina.Entities
 {
-    public class Vacunas: AuditableBaseEntity
+	public class Vacuna: AuditableBaseEntity
     {
         public string Nombre { get; set; }
         public string Laboratorio { get; set; }

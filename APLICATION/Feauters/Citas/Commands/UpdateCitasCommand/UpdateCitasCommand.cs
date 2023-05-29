@@ -16,11 +16,11 @@ namespace APLICATION.Feauters.Citas.Commands.UpdateCitasCommand
     public class UpdateCitasCommand : IRequest<Response<Guid>>
     {
         public Guid Id { get; set; }
-        public string CentroId { get; set; }
+        public Guid CentroId { get; set; }
         public CentrosDto Centro { get; set; }
-        public string VacunadorId { get; set; }
+        public Guid VacunadorId { get; set; }
         public VacunadoresDto Vacunadores { get; set; }
-        public string CaninoId { get; set; }
+        public Guid CaninoId { get; set; }
         public CaninoDto Canino { get; set; }
         public Estados Estatus { get; set; }
         public DateTime FechaCita { get; set; }
@@ -28,10 +28,10 @@ namespace APLICATION.Feauters.Citas.Commands.UpdateCitasCommand
     public class UpdateCitasCommandHandler : IRequestHandler<UpdateCitasCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Citas> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Cita> _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public UpdateCitasCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Citas> repositoryAsync, IMapper mapper = null)
+        public UpdateCitasCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Cita> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

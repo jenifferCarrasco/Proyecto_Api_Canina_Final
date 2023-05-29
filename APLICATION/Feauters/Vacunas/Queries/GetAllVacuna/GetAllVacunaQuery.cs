@@ -24,11 +24,11 @@ namespace APLICATION.Feauters.Vacunas.Queries.GetAllVacuna
 
         public class GetAllVacunaQueryHandler : IRequestHandler<GetAllVacunaQuery, PagedResponse<List<VacunasDto>>>
         {
-            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunas> _repositoryAsync;
+            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacuna> _repositoryAsync;
             private readonly IMapper _mapper;
             private readonly IDistributedCache _distributedCache;
 
-            public GetAllVacunaQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunas> repositoryAsync, IMapper mapper, IDistributedCache distributedCache)
+            public GetAllVacunaQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacuna> repositoryAsync, IMapper mapper, IDistributedCache distributedCache)
             {
                 _repositoryAsync = repositoryAsync;
                 _mapper = mapper;
@@ -41,13 +41,13 @@ namespace APLICATION.Feauters.Vacunas.Queries.GetAllVacuna
 
                 var cacheKey = $"ListClient_{request.PageNumber}_{request.PageSize}_{request.Nombre}_{request.Laboratorio}";
                 string serializedListClient;
-                var listClient = new List<DOMAIN.Canina.Entities.Vacunas>();
+                var listClient = new List<DOMAIN.Canina.Entities.Vacuna>();
                 var redisListClient = await _distributedCache.GetAsync(cacheKey);
 
                 if (redisListClient != null)
                 {
                     serializedListClient = Encoding.UTF8.GetString(redisListClient);
-                    listClient = JsonConvert.DeserializeObject<List<DOMAIN.Canina.Entities.Vacunas>>(serializedListClient);
+                    listClient = JsonConvert.DeserializeObject<List<DOMAIN.Canina.Entities.Vacuna>>(serializedListClient);
                 }
                 else { 
                     listClient = await _repositoryAsync.ListAsync(new PagedVacunaSpecification(

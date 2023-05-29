@@ -6,9 +6,9 @@ using System.Text;
 
 namespace PERSISTENCE.Canina.Configuration
 {
-    public class CentroConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Centros>
+    public class CentroConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Centro>
     {
-        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Centros> builder)
+        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Centro> builder)
         {
             builder.ToTable("Centros");
             builder.HasKey(p => p.Id);

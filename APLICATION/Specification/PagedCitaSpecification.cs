@@ -6,7 +6,7 @@ using System.Text;
 
 namespace APLICATION.Specification
 {
-    public class PagedCitaSpecification : Specification<Citas>
+    public class PagedCitaSpecification : Specification<Cita>
     {
         public PagedCitaSpecification(int pageSize, int pageNumber, DateTime fecha, Guid centro)
         {

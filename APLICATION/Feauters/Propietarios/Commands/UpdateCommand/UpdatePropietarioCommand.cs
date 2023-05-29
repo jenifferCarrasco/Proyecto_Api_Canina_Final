@@ -28,10 +28,10 @@ namespace APLICATION.Feauters.Propietarios.Commands.UpdateCommand
     public class UpdatePropietarioCommandHandler : IRequestHandler<UpdatePropietarioCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Propietarios> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Propietario> _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public UpdatePropietarioCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Propietarios> repositoryAsync, IMapper mapper = null)
+        public UpdatePropietarioCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Propietario> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

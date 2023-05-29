@@ -25,11 +25,11 @@ namespace APLICATION.Feauters.Propietarios.Queries.GetAllPropietario
 
         public class GetAllPropietarioQueryHandler : IRequestHandler<GetAllPropietarioQuery, PagedResponse<List<PropietariosDto>>>
         {
-            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Propietarios> _repositoryAsync;
+            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Propietario> _repositoryAsync;
             private readonly IMapper _mapper;
             private readonly IDistributedCache _distributedCache;
 
-            public GetAllPropietarioQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Propietarios> repositoryAsync, IMapper mapper, IDistributedCache distributedCache)
+            public GetAllPropietarioQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Propietario> repositoryAsync, IMapper mapper, IDistributedCache distributedCache)
             {
                 _repositoryAsync = repositoryAsync;
                 _mapper = mapper;
@@ -42,13 +42,13 @@ namespace APLICATION.Feauters.Propietarios.Queries.GetAllPropietario
 
                 var cacheKey = $"ListClient_{request.PageNumber}_{request.PageSize}_{request.Nombre}_{request.Cedula}";
                 string serializedListClient;
-                var listClient = new List<DOMAIN.Canina.Entities.Propietarios>();
+                var listClient = new List<DOMAIN.Canina.Entities.Propietario>();
                 var redisListClient = await _distributedCache.GetAsync(cacheKey);
 
                 if (redisListClient != null)
                 {
                     serializedListClient = Encoding.UTF8.GetString(redisListClient);
-                    listClient = JsonConvert.DeserializeObject<List<DOMAIN.Canina.Entities.Propietarios>>(serializedListClient);
+                    listClient = JsonConvert.DeserializeObject<List<DOMAIN.Canina.Entities.Propietario>>(serializedListClient);
                 }
                 else
                 {

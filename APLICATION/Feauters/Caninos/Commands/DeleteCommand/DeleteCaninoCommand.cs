@@ -20,10 +20,10 @@ namespace APLICATION.Feauters.Clientes.Commands.DeleteClientCommand
     public class DeleteCaninoCommandHandler : IRequestHandler<DeleteCaninoCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Caninos> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Canino> _repositoryAsync;
         
 
-        public DeleteCaninoCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Caninos> repositoryAsync, IMapper mapper = null)
+        public DeleteCaninoCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Canino> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
           

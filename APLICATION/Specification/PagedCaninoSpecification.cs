@@ -6,7 +6,7 @@ using System.Text;
 
 namespace APLICATION.Specification
 {
-    public class PagedCaninoSpecification : Specification<Caninos>
+    public class PagedCaninoSpecification : Specification<Canino>
     {
         public PagedCaninoSpecification(int pageSize, int pageNumber, string nombre, string raza)
         {

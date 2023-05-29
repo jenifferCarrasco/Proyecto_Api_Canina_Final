@@ -10,7 +10,7 @@ using PERSISTENCE.Canina.Context;
 namespace PERSISTENCE.Canina.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230528230119_Initial")]
+    [Migration("20230529013545_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace PERSISTENCE.Canina.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Administradores", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Administrador", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,12 +50,14 @@ namespace PERSISTENCE.Canina.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UsuarioId")
+                        .IsUnique()
+                        .HasFilter("[UsuarioId] IS NOT NULL");
 
                     b.ToTable("Administradores");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Caninos", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Canino", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,10 +98,7 @@ namespace PERSISTENCE.Canina.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("PropietarioId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("PropietarioId1")
+                    b.Property<Guid>("PropietarioId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Raza")
@@ -112,12 +111,12 @@ namespace PERSISTENCE.Canina.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PropietarioId1");
+                    b.HasIndex("PropietarioId");
 
                     b.ToTable("Caninos");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Centros", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Centro", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,24 +154,16 @@ namespace PERSISTENCE.Canina.Migrations
                     b.ToTable("Centros");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Citas", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Cita", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CaninoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("CaninoId1")
+                    b.Property<Guid>("CaninoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CentroId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("CentroId1")
+                    b.Property<Guid>("CentroId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
@@ -195,59 +186,21 @@ namespace PERSISTENCE.Canina.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("VacunadorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("VacunadorId1")
+                    b.Property<Guid>("VacunadorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CaninoId1");
+                    b.HasIndex("CaninoId");
 
-                    b.HasIndex("CentroId1");
+                    b.HasIndex("CentroId");
 
-                    b.HasIndex("VacunadorId1");
+                    b.HasIndex("VacunadorId");
 
                     b.ToTable("Citas");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Moderadores", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Moderadores");
-                });
-
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Propietarios", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Propietario", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -304,16 +257,13 @@ namespace PERSISTENCE.Canina.Migrations
                     b.ToTable("Propietarios");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Usuarios", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Usuario", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -332,9 +282,6 @@ namespace PERSISTENCE.Canina.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -352,10 +299,10 @@ namespace PERSISTENCE.Canina.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Roles")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoUsuario")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -378,133 +325,7 @@ namespace PERSISTENCE.Canina.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunaciones", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CaninoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("CaninoId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CentroId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("CentroId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Dosis")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<DateTime>("FechaProxima")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("VacunaId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("VacunaId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("VacunadorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("VacunadorId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CaninoId1");
-
-                    b.HasIndex("CentroId1");
-
-                    b.HasIndex("VacunaId1");
-
-                    b.HasIndex("VacunadorId1");
-
-                    b.ToTable("Vacunaciones");
-                });
-
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunadores", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<string>("Cedula")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
-
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId")
-                        .IsUnique()
-                        .HasFilter("[UsuarioId] IS NOT NULL");
-
-                    b.ToTable("Vacunadores");
-                });
-
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunas", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacuna", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -551,6 +372,109 @@ namespace PERSISTENCE.Canina.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Vacunas");
+                });
+
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunacion", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CaninoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CentroId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Dosis")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<DateTime>("FechaProxima")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<Guid>("VacunaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("VacunadorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaninoId");
+
+                    b.HasIndex("CentroId");
+
+                    b.HasIndex("VacunaId");
+
+                    b.HasIndex("VacunadorId");
+
+                    b.ToTable("Vacunaciones");
+                });
+
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunador", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("Cedula")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vacunadores");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -684,37 +608,45 @@ namespace PERSISTENCE.Canina.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Administradores", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Administrador", b =>
                 {
-                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", "Usuario")
-                        .WithMany("Administradores")
-                        .HasForeignKey("UsuarioId");
+                    b.HasOne("DOMAIN.Canina.Entities.Usuario", "Usuario")
+                        .WithOne("Administrador")
+                        .HasForeignKey("DOMAIN.Canina.Entities.Administrador", "UsuarioId");
 
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Caninos", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Canino", b =>
                 {
-                    b.HasOne("DOMAIN.Canina.Entities.Propietarios", "Propietario")
+                    b.HasOne("DOMAIN.Canina.Entities.Propietario", "Propietario")
                         .WithMany("Caninos")
-                        .HasForeignKey("PropietarioId1");
+                        .HasForeignKey("PropietarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Propietario");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Citas", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Cita", b =>
                 {
-                    b.HasOne("DOMAIN.Canina.Entities.Caninos", "Canino")
+                    b.HasOne("DOMAIN.Canina.Entities.Canino", "Canino")
                         .WithMany("Citas")
-                        .HasForeignKey("CaninoId1");
+                        .HasForeignKey("CaninoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DOMAIN.Canina.Entities.Centros", "Centro")
+                    b.HasOne("DOMAIN.Canina.Entities.Centro", "Centro")
                         .WithMany("Citas")
-                        .HasForeignKey("CentroId1");
+                        .HasForeignKey("CentroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DOMAIN.Canina.Entities.Vacunadores", "Vacunador")
+                    b.HasOne("DOMAIN.Canina.Entities.Vacunador", "Vacunador")
                         .WithMany()
-                        .HasForeignKey("VacunadorId1");
+                        .HasForeignKey("VacunadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Canino");
 
@@ -723,41 +655,40 @@ namespace PERSISTENCE.Canina.Migrations
                     b.Navigation("Vacunador");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Moderadores", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Propietario", b =>
                 {
-                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", "Usuario")
-                        .WithMany("Moderadores")
-                        .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Propietarios", b =>
-                {
-                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", "Usuario")
+                    b.HasOne("DOMAIN.Canina.Entities.Usuario", "Usuario")
                         .WithOne("Propietario")
-                        .HasForeignKey("DOMAIN.Canina.Entities.Propietarios", "UsuarioId");
+                        .HasForeignKey("DOMAIN.Canina.Entities.Propietario", "UsuarioId");
 
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunaciones", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunacion", b =>
                 {
-                    b.HasOne("DOMAIN.Canina.Entities.Caninos", "Canino")
+                    b.HasOne("DOMAIN.Canina.Entities.Canino", "Canino")
                         .WithMany("Vacunaciones")
-                        .HasForeignKey("CaninoId1");
+                        .HasForeignKey("CaninoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DOMAIN.Canina.Entities.Centros", "Centro")
+                    b.HasOne("DOMAIN.Canina.Entities.Centro", "Centro")
                         .WithMany("Vacunaciones")
-                        .HasForeignKey("CentroId1");
+                        .HasForeignKey("CentroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DOMAIN.Canina.Entities.Vacunas", "Vacuna")
+                    b.HasOne("DOMAIN.Canina.Entities.Vacuna", "Vacuna")
                         .WithMany()
-                        .HasForeignKey("VacunaId1");
+                        .HasForeignKey("VacunaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DOMAIN.Canina.Entities.Vacunadores", "Vacunador")
+                    b.HasOne("DOMAIN.Canina.Entities.Vacunador", "Vacunador")
                         .WithMany("Vacunaciones")
-                        .HasForeignKey("VacunadorId1");
+                        .HasForeignKey("VacunadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Canino");
 
@@ -766,15 +697,6 @@ namespace PERSISTENCE.Canina.Migrations
                     b.Navigation("Vacuna");
 
                     b.Navigation("Vacunador");
-                });
-
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunadores", b =>
-                {
-                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", "Usuario")
-                        .WithOne("Vacunadores")
-                        .HasForeignKey("DOMAIN.Canina.Entities.Vacunadores", "UsuarioId");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -788,7 +710,7 @@ namespace PERSISTENCE.Canina.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", null)
+                    b.HasOne("DOMAIN.Canina.Entities.Usuario", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -797,7 +719,7 @@ namespace PERSISTENCE.Canina.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", null)
+                    b.HasOne("DOMAIN.Canina.Entities.Usuario", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -812,7 +734,7 @@ namespace PERSISTENCE.Canina.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", null)
+                    b.HasOne("DOMAIN.Canina.Entities.Usuario", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -821,44 +743,40 @@ namespace PERSISTENCE.Canina.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("DOMAIN.Canina.Entities.Usuarios", null)
+                    b.HasOne("DOMAIN.Canina.Entities.Usuario", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Caninos", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Canino", b =>
                 {
                     b.Navigation("Citas");
 
                     b.Navigation("Vacunaciones");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Centros", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Centro", b =>
                 {
                     b.Navigation("Citas");
 
                     b.Navigation("Vacunaciones");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Propietarios", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Propietario", b =>
                 {
                     b.Navigation("Caninos");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Usuarios", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Usuario", b =>
                 {
-                    b.Navigation("Administradores");
-
-                    b.Navigation("Moderadores");
+                    b.Navigation("Administrador");
 
                     b.Navigation("Propietario");
-
-                    b.Navigation("Vacunadores");
                 });
 
-            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunadores", b =>
+            modelBuilder.Entity("DOMAIN.Canina.Entities.Vacunador", b =>
                 {
                     b.Navigation("Vacunaciones");
                 });

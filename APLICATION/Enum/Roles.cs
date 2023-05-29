@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace APLICATION.Enum
+﻿namespace APLICATION.Enum
 {
-    public enum Roles
+	public enum Roles
     {
-        Admin,
-        Moderador,
-        Paciente,
-        Vacunador
+        Admin = 1,
+        Moderador = 2,
+        Propietario = 3,
     }
 }

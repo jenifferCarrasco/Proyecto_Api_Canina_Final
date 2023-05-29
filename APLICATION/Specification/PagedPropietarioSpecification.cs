@@ -3,7 +3,7 @@ using DOMAIN.Canina.Entities;
 
 namespace APLICATION.Specification
 {
-    public class PagedPropietarioSpecification : Specification<Propietarios>
+    public class PagedPropietarioSpecification : Specification<Propietario>
     {
         public PagedPropietarioSpecification(int pageSize, int pageNumber, string nombre, string cedula)
         {

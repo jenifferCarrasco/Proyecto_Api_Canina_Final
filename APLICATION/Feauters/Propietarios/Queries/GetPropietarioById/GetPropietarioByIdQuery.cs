@@ -18,10 +18,10 @@ namespace APLICATION.Feauters.Propietarios.Queries.GetPropietarioById
         public class GetPropietarioByIdQueryHandler : IRequestHandler<GetPropietarioByIdQuery, Response<PropietariosDto>>
         {
 
-            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Propietarios> _repositoryAsync;
+            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Propietario> _repositoryAsync;
             private readonly IMapper _mapper;
 
-            public GetPropietarioByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Propietarios> repositoryAsync, IMapper mapper)
+            public GetPropietarioByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Propietario> repositoryAsync, IMapper mapper)
             {
                 _repositoryAsync = repositoryAsync;
                 _mapper = mapper;

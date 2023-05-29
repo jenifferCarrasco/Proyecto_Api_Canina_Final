@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PERSISTENCE.Canina.Context
 {
-	public class ApplicationDbContext : IdentityDbContext<Usuarios>
+	public class ApplicationDbContext : IdentityDbContext<Usuario>
     {
         private readonly IDateTimeService _dateTime;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDateTimeService dateTime) : base (options)
@@ -19,15 +19,14 @@ namespace PERSISTENCE.Canina.Context
             _dateTime = dateTime;
         }
 
-        public DbSet<Caninos> Caninos { get; set; }
-        public DbSet<Propietarios> Propietarios { get; set; }
-        public DbSet<Vacunadores> Vacunadores { get; set; }
-        public DbSet<Administradores> Administradores { get; set; }
-        public DbSet<Moderadores> Moderadores { get; set; }
-        public DbSet<Centros> Centros { get; set; }
-        public DbSet<Citas> Citas { get; set; }
-        public DbSet<Vacunaciones> Vacunaciones { get; set; }
-        public DbSet<Vacunas> Vacunas{ get; set; }
+        public DbSet<Canino> Caninos { get; set; }
+        public DbSet<Propietario> Propietarios { get; set; }
+        public DbSet<Vacunador> Vacunadores { get; set; }
+        public DbSet<Administrador> Administradores { get; set; }
+        public DbSet<Centro> Centros { get; set; }
+        public DbSet<Cita> Citas { get; set; }
+        public DbSet<Vacunacion> Vacunaciones { get; set; }
+        public DbSet<Vacuna> Vacunas{ get; set; }
         public Assembly Assemble { get; private set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken()) {

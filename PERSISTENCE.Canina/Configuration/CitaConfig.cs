@@ -6,9 +6,9 @@ using System.Text;
 
 namespace PERSISTENCE.Canina.Configuration
 {
-    public class CitaConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Citas>
+    public class CitaConfig : IEntityTypeConfiguration<DOMAIN.Canina.Entities.Cita>
     {
-        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Citas> builder)
+        public void Configure(EntityTypeBuilder<DOMAIN.Canina.Entities.Cita> builder)
         {
             builder.ToTable("Citas");
             builder.HasKey(p => p.Id);

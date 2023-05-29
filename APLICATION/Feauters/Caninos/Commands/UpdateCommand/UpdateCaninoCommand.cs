@@ -23,17 +23,17 @@ namespace APLICATION.Feauters.Caninos.Commands.UpdateCommand
         public string Peso { get; set; }
         public string Color { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public string PropietarioId { get; set; }
+        public Guid PropietarioId { get; set; }
         public Estados Estatus { get; set; }
 
     }
     public class UpdateCaninoCommandHandler : IRequestHandler<UpdateCaninoCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Caninos> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Canino> _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public UpdateCaninoCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Caninos> repositoryAsync, IMapper mapper = null)
+        public UpdateCaninoCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Canino> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace APLICATION.Specification
 {
-    public class PagedVacunacionSpecification : Specification<DOMAIN.Canina.Entities.Vacunaciones>
+    public class PagedVacunacionSpecification : Specification<DOMAIN.Canina.Entities.Vacunacion>
     {
         public PagedVacunacionSpecification(int pageSize, int pageNumber, Guid canino, Guid vacunador)
         {

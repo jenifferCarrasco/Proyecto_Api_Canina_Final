@@ -12,7 +12,7 @@ namespace APLICATION.DTOs
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public Estados Estatus { get; set; }
-        public virtual ICollection<Citas> Citas { get; set; }
-        public virtual ICollection<Vacunaciones> Vacunaciones { get; set; }
+        public virtual ICollection<Cita> Citas { get; set; }
+        public virtual ICollection<Vacunacion> Vacunaciones { get; set; }
     }
 }

@@ -27,10 +27,10 @@ namespace APLICATION.Feauters.Vacunadores.Commands.UpdateCommand
     public class UpdateVacunadoresCommandHandler : IRequestHandler<UpdateVacunadoresCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunadores> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunador> _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public UpdateVacunadoresCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunadores> repositoryAsync, IMapper mapper = null)
+        public UpdateVacunadoresCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunador> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

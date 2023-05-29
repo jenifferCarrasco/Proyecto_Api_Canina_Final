@@ -19,10 +19,10 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.DeleteVacunacionCommand
     public class DeleteVacunacionCommandHandler : IRequestHandler<DeleteVacunacionCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunaciones> _repositoryAsync;
+        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunacion> _repositoryAsync;
         
 
-        public DeleteVacunacionCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunaciones> repositoryAsync, IMapper mapper = null)
+        public DeleteVacunacionCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunacion> repositoryAsync, IMapper mapper = null)
         {
             _repositoryAsync = repositoryAsync;
           

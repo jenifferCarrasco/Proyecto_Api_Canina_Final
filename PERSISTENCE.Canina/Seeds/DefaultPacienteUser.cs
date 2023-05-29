@@ -1,33 +1,28 @@
 ﻿using APLICATION.Enum;
 using DOMAIN.Canina.Entities;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PERSISTENCE.Canina.Seeds
 {
-    public static class DefaultPacienteUser
+	public static class DefaultPacienteUser
     {
-        public static async Task SeedAsync(UserManager<Usuarios> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedAsync(UserManager<Usuario> userManager)
         {
-            var defaultUser = new Usuarios
+            var defaultUser = new Usuario
             {
-                Propietario = new Propietarios {
+                Propietario = new Propietario {
 
                     Nombre = "Jeniffer",
                     Apellido = "Carrasco",
-                    Cedula = "402-1109873-4",
+                    Cedula = "40211098734",
                     Direccion = "Santo Domingo Este",
-                    Telefono = "809-765-4562"
-
+                    Telefono = "8097654562",
                 },
-                Nombre = "Jeniffer",
-                Apellido = "Carrasco",
-                UserName = "userAdmin",
-                Email = "userAdmin@gmail.com",
+                TipoUsuario = UserType.Propietario.ToString(),
+                UserName = "userPropietario",
+                Email = "propietario@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
@@ -39,7 +34,7 @@ namespace PERSISTENCE.Canina.Seeds
                 if (user == null)
                 {
                     await userManager.CreateAsync(defaultUser, "S3v3r1na");
-                    await userManager.AddToRoleAsync(defaultUser, Roles.Paciente.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Roles.Propietario.ToString());
 
                 }
             }

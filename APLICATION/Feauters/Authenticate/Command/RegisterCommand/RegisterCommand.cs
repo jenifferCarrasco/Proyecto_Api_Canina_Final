@@ -4,6 +4,7 @@ using APLICATION.Enum;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using APLICATION.DTOs.User;
 
 namespace APLICATION.Feauters.Authenticate.Command.RegisterCommand
 {
@@ -12,9 +13,7 @@ namespace APLICATION.Feauters.Authenticate.Command.RegisterCommand
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
-        //public string Cedula { get; set; }
-        //public string Direccion { get; set; }
-        public Roles Roles { get; set; }
+        public Roles? Rol { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
@@ -31,7 +30,7 @@ namespace APLICATION.Feauters.Authenticate.Command.RegisterCommand
         }
         public async Task<Response<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            return await _accountService.RegisterAsync(new DTOs.User.RegisterRequest
+            return await _accountService.RegisterAdministradoresAsync(new RegisterRequest
             {
 
                 Email = request.Email,
@@ -40,10 +39,7 @@ namespace APLICATION.Feauters.Authenticate.Command.RegisterCommand
                 UserName = request.UserName,
                 Nombre = request.Nombre,
                 Apellido = request.Apellido,
-                //Cedula = request.Cedula,
-                //Direccion = request.Direccion,
-                Roles = request.Roles,
-               
+                Rol = request.Rol,
 
             }, request.Origin);
         }

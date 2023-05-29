@@ -16,10 +16,10 @@ namespace APLICATION.Feauters.Caninos.Queries.GetCaninoById
         public Guid Id { get; set; }
         public class GetCaninoByIdQueryHandler : IRequestHandler<GetCaninoByIdQuery, Response<CaninoDto>> {
 
-            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Caninos> _repositoryAsync;
+            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Canino> _repositoryAsync;
             private readonly IMapper _mapper;
 
-            public GetCaninoByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Caninos> repositoryAsync, IMapper mapper)
+            public GetCaninoByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Canino> repositoryAsync, IMapper mapper)
             {
                 _repositoryAsync = repositoryAsync;
                 _mapper = mapper;

@@ -16,7 +16,7 @@ namespace APLICATION.DTOs
         public string Telefono { get; set; }
 
         public string UsuarioId { get; set; }
-        public Usuarios Usuario { get; set; }
-        public ICollection<Caninos> Caninos { get; set; }
+        public Usuario Usuario { get; set; }
+        public ICollection<Canino> Caninos { get; set; }
     }
 }
