@@ -2,17 +2,14 @@
 using APLICATION.Interface;
 using APLICATION.Wrappers;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace APLICATION.Feauters.Authenticate.Command.AuthenticateCommand
 {
-    public class AuthenticateCommand: IRequest<Response<AuthenticationResponse>>
+	public class AuthenticateCommand: IRequest<Response<AuthenticationResponse>>
     {
-        public string Email { get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
 
         public string IpAddress { get; set; }
@@ -30,7 +27,7 @@ namespace APLICATION.Feauters.Authenticate.Command.AuthenticateCommand
         {
             return await _accountService.AuthenticateAsync(new AuthenticationRequest
             {
-                Email = request.Email,
+				Username = request.Username,
                 Password = request.Password
             }, request.IpAddress); 
             

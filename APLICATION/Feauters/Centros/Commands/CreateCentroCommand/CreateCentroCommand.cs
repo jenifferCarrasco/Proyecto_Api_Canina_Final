@@ -15,7 +15,6 @@ namespace APLICATION.Feauters.Centros.Commands.CreateCentroCommand
     {
         public string Nombre { get; set; }
         public string Direccion { get; set; }
-        public Estados Estatus { get; set; }
 
     }
     public class CreateCentroCommandHandler : IRequestHandler<CreateCentroCommand, Response<Guid>>

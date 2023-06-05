@@ -19,7 +19,6 @@ namespace APLICATION.Feauters.Propietarios.Queries.GetAllPropietario
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-
         public string Nombre { get; set; }
         public string Cedula { get; set; }
 

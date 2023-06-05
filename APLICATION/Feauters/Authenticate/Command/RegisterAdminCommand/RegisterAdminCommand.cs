@@ -1,14 +1,14 @@
-﻿using APLICATION.Interface;
-using APLICATION.Wrappers;
+﻿using APLICATION.DTOs.User;
 using APLICATION.Enum;
+using APLICATION.Interface;
+using APLICATION.Wrappers;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using APLICATION.DTOs.User;
 
-namespace APLICATION.Feauters.Authenticate.Command.RegisterCommand
+namespace APLICATION.Feauters.Authenticate.Command.RegisterAdminCommand
 {
-    public class RegisterCommand : IRequest<Response<string>>
+	public class RegisterAdminCommand : IRequest<Response<string>>
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -16,31 +16,28 @@ namespace APLICATION.Feauters.Authenticate.Command.RegisterCommand
         public Roles? Rol { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
         public string Origin { get; set; }
     }
 
-    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Response<string>>
+    public class RegisterAdminCommandHandler : IRequestHandler<RegisterAdminCommand, Response<string>>
     {
         private readonly IAccountService _accountService;
 
-        public RegisterCommandHandler(IAccountService accountService)
+        public RegisterAdminCommandHandler(IAccountService accountService)
         {
             _accountService = accountService;
         }
-        public async Task<Response<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(RegisterAdminCommand request, CancellationToken cancellationToken)
         {
-            return await _accountService.RegisterAdministradoresAsync(new RegisterRequest
+            return await _accountService.RegisterAdministradoresAsync(new RegisterAdminRequest
             {
 
                 Email = request.Email,
                 Password = request.Password,
-                ConfirmPassword = request.ConfirmPassword,
                 UserName = request.UserName,
                 Nombre = request.Nombre,
                 Apellido = request.Apellido,
                 Rol = request.Rol,
-
             }, request.Origin);
         }
     }

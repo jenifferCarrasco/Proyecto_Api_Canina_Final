@@ -3,6 +3,7 @@ using APLICATION.Feauters.Canino.Queries.GetAllCanino;
 using APLICATION.Feauters.Caninos.Commands.UpdateCommand;
 using APLICATION.Feauters.Caninos.Queries.GetAllCanino;
 using APLICATION.Feauters.Caninos.Queries.GetCaninoById;
+using APLICATION.Feauters.Caninos.Queries.GetCaninosByPropietarioId;
 using APLICATION.Feauters.Clientes.Commands.DeleteClientCommand;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,8 +36,14 @@ namespace API.Canina.Controllers.v1
             return Ok(await Mediator.Send(new GetCaninoByIdQuery { Id = id }));
         }
 
-        //POST api/<controller>
-        [HttpPost]
+		[HttpGet("Propietario/{id}")]
+		public async Task<IActionResult> GetCaninoByPropietarioId(Guid id)
+		{
+			return Ok(await Mediator.Send(new GetCaninosByPropietarioIdQuery { PropietarioId = id }));
+		}
+
+		//POST api/<controller>
+		[HttpPost]
         //[Authorize(Roles = "Admin")]
         //[Authorize(Roles = "Moderador")]
         public async Task<IActionResult> Post(CreateCaninoCommand createClientCommand)
@@ -45,8 +52,8 @@ namespace API.Canina.Controllers.v1
         }
         //PUT api/<controller>/5
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Moderador")]
+        //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Moderador")]
         public async Task<IActionResult> Put(Guid id, UpdateCaninoCommand updateClientCommand)
         {
             if (id != updateClientCommand.Id)
@@ -55,8 +62,8 @@ namespace API.Canina.Controllers.v1
         }
         //DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Moderador")]
+        //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Moderador")]
         public async Task<IActionResult> Delete(Guid id)
         {
 

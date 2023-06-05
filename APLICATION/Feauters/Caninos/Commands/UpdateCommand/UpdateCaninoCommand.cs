@@ -1,66 +1,56 @@
-﻿using APLICATION.Exceptions;
+﻿using APLICATION.Wrappers;
 using Application.Interface;
-using APLICATION.Wrappers;
-using AutoMapper;
+using DOMAIN.Canina;
+using DOMAIN.Canina.Enum;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DOMAIN.Canina;
-using DOMAIN.Canina.Entities;
 
 namespace APLICATION.Feauters.Caninos.Commands.UpdateCommand
 {
-    
-    public class UpdateCaninoCommand : IRequest<Response<Guid>>
-    {
-        public Guid Id { get; set; }
-        public string Nombre { get; set; }
-        public string Raza { get; set; }
-        public bool Sexo { get; set; }
-        public string Peso { get; set; }
-        public string Color { get; set; }
-        public DateTime FechaNacimiento { get; set; }
-        public Guid PropietarioId { get; set; }
-        public Estados Estatus { get; set; }
 
-    }
-    public class UpdateCaninoCommandHandler : IRequestHandler<UpdateCaninoCommand, Response<Guid>>
-    {
+	public class UpdateCaninoCommand : IRequest<Response<string>>
+	{
+		public Guid Id { get; set; }
+		public string Nombre { get; set; }
+		public string Raza { get; set; }
+		public Generos Sexo { get; set; }
+		public string Peso { get; set; }
+		public string Color { get; set; }
+		public DateTime FechaNacimiento { get; set; }
+		public Estados Estatus { get; set; }
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Canino> _repositoryAsync;
-        private readonly IMapper _mapper;
+	}
+	public class UpdateCaninoCommandHandler : IRequestHandler<UpdateCaninoCommand, Response<string>>
+	{
 
-        public UpdateCaninoCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Canino> repositoryAsync, IMapper mapper = null)
-        {
-            _repositoryAsync = repositoryAsync;
-            _mapper = mapper;
-        }
+		private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Canino> _repositoryAsync;
+
+		public UpdateCaninoCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Canino> repositoryAsync)
+		{
+			_repositoryAsync = repositoryAsync;
+		}
 
 
-        public async Task<Response<Guid>> Handle(UpdateCaninoCommand request, CancellationToken cancellationToken)
-        {
-            var client = await _repositoryAsync.GetByIdAsync(request.Id);
-            if (client == null)
-            {
-                throw new KeyNotFoundException($"Registro no encontrado con el id {request.Id}");
-            }
-            else {
-                client.Nombre = request.Nombre;
-                client.Raza = request.Raza;
-                client.FechaNacimiento = request.FechaNacimiento;
-                client.Sexo = request.Sexo;
-                client.Peso = request.Peso;
-                client.PropietarioId = request.PropietarioId;
-                client.Color = request.Color;
-                client.Estatus = request.Estatus;
+		public async Task<Response<string>> Handle(UpdateCaninoCommand request, CancellationToken cancellationToken)
+		{
+			var canino = await _repositoryAsync.GetByIdAsync(request.Id) ??
+				throw new KeyNotFoundException($"Registro no encontrado con el id {request.Id}");
 
-                await _repositoryAsync.UpdateAsync(client);
+			canino.Nombre = request.Nombre;
+			canino.Raza = request.Raza;
+			canino.FechaNacimiento = request.FechaNacimiento;
+			canino.Sexo = request.Sexo;
+			canino.Peso = request.Peso;
+			canino.Color = request.Color;
+			canino.Estatus = request.Estatus;
 
-                return new Response<Guid>(client.Id);
-            }
-        }
-    }
+			await _repositoryAsync.UpdateAsync(canino);
+
+			return new Response<string>(canino.Id.ToString());
+		}
+	}
 }
+

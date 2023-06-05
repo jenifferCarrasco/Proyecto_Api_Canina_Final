@@ -1,16 +1,14 @@
 ﻿using APLICATION.Wrappers;
 using Application.Interface;
-using AutoMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace APLICATION.Feauters.Centros.Commands.DeleteCentroCommand
 {
-    public class DeleteCentroCommand : IRequest<Response<Guid>>
+	public class DeleteCentroCommand : IRequest<Response<Guid>>
     {
         public Guid Id { get; set; }
     }
@@ -18,28 +16,25 @@ namespace APLICATION.Feauters.Centros.Commands.DeleteCentroCommand
     {
 
         private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Centro> _repositoryAsync;
-
-
-        public DeleteCentroCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Centro> repositoryAsync, IMapper mapper = null)
+        public DeleteCentroCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Centro> repositoryAsync)
         {
             _repositoryAsync = repositoryAsync;
 
         }
 
-
         public async Task<Response<Guid>> Handle(DeleteCentroCommand request, CancellationToken cancellationToken)
         {
-            var client = await _repositoryAsync.GetByIdAsync(request.Id);
-            if (client == null)
+            var centro = await _repositoryAsync.GetByIdAsync(request.Id);
+            if (centro == null)
             {
                 throw new KeyNotFoundException($"Registro no encontrado con el id {request.Id}");
             }
             else
             {
 
-                await _repositoryAsync.DeleteAsync(client);
+                await _repositoryAsync.DeleteAsync(centro);
 
-                return new Response<Guid>(client.Id);
+                return new Response<Guid>(centro.Id);
             }
         }
     }

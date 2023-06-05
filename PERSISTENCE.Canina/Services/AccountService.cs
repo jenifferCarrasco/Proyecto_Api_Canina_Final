@@ -6,6 +6,7 @@ using APLICATION.Wrappers;
 using DOMAIN.Canina.Entities;
 using DOMAIN.Canina.Setting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PERSISTENCE.Canina.Context;
@@ -24,19 +25,16 @@ namespace PERSISTENCE.Canina.Services
 	public class AccountService : IAccountService
 	{
 		private readonly UserManager<Usuario> _userManage;
-		private readonly RoleManager<Usuario> _roleManage;
 		private readonly SignInManager<Usuario> _singInManage;
 		private readonly JWTSetting _jwtSetting;
 		private readonly ApplicationDbContext _context;
 
 		public AccountService(UserManager<Usuario> userManage,
-			RoleManager<Usuario> roleManage = null,
 			IOptions<JWTSetting> jwtSetting = null,
 			SignInManager<Usuario> singInManage = null,
 			ApplicationDbContext context = null)
 		{
 			_userManage = userManage;
-			_roleManage = roleManage;
 			_jwtSetting = jwtSetting.Value;
 			_singInManage = singInManage;
 			_context = context;
@@ -44,11 +42,12 @@ namespace PERSISTENCE.Canina.Services
 
 		public async Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, string ipAddress)
 		{
-			var usuario = await _userManage.FindByEmailAsync(request.Email)
-				?? throw new ApiException($"No existe una cuenta registrada con el Email {request.Email}.");
+			var usuario = await _context.Users.FirstOrDefaultAsync(x=>x.UserName ==request.Username)
+				?? throw new ApiException($"No existe una cuenta registrada con {request.Username}.");
 
 			var result = await _singInManage.PasswordSignInAsync(usuario.UserName, request.Password,
 				false, lockoutOnFailure: false);
+
 			if (!result.Succeeded)
 			{
 				throw new ApiException($"Usuario o contraseña incorrecta!");
@@ -73,17 +72,17 @@ namespace PERSISTENCE.Canina.Services
 
 		}
 
-		public async Task<Response<string>> RegisterAdministradoresAsync(RegisterRequest request, string origin)
+		public async Task<Response<string>> RegisterAdministradoresAsync(RegisterAdminRequest request, string origin)
 		{
-			var usuarioSame = await _userManage.FindByNameAsync(request.UserName);
-			var usuarioSameEmail = await _userManage.FindByEmailAsync(request.Email);
+			var usuarioExiste = await _userManage.FindByNameAsync(request.UserName);
+			var emailExiste = await _userManage.FindByEmailAsync(request.Email);
 
-			if (usuarioSame != null)
+			if (usuarioExiste != null)
 			{
 				throw new ApiException($"Este nombre de usuario {request.UserName} ya existe!");
 			}
 
-			if (usuarioSameEmail != null)
+			if (emailExiste != null)
 			{
 				throw new ApiException($"Este Email de usuario {request.Email} ya existe!");
 			}
@@ -113,6 +112,60 @@ namespace PERSISTENCE.Canina.Services
 				throw new ApiException($"{result.Errors}.");
 			}
 		}
+
+		public async Task<Response<string>> RegisterPropietariosAsync(RegisterPropietarioRequest request, string origin)
+		{
+			var usuarioExiste = await _userManage.FindByNameAsync(request.UserName);
+			var emailExiste = await _userManage.FindByEmailAsync(request.Email);
+			var cedulaExiste = await _context.Propietarios.AllAsync(x => x.Cedula == request.Cedula);
+
+			if (usuarioExiste != null)
+			{
+				throw new ApiException($"Este nombre de usuario {request.UserName} ya existe!");
+			}
+
+			if (emailExiste != null)
+			{
+				throw new ApiException($"Este Email de usuario {request.Email} ya existe!");
+			}
+			if (cedulaExiste)
+			{
+				throw new ApiException($"Esta cedula {request.Cedula} ya existe!");
+			}
+
+
+			var usuario = new Usuario
+			{
+				TipoUsuario = UserType.Administrador.ToString(),
+				Email = request.Email,
+				UserName = request.UserName,
+				EmailConfirmed = true,
+				PhoneNumberConfirmed = true,
+				Propietario = new Propietario
+				{
+					Nombre = request.Nombre,
+					Apellido = request.Apellido,
+					Cedula = request.Cedula,
+					Telefono = request.Telefono,
+					Direccion = request.Direccion,
+					Sexo = request.Sexo
+				}
+			};
+
+			var result = await _userManage.CreateAsync(usuario, request.Password);
+			if (result.Succeeded)
+			{
+				await _userManage.AddToRoleAsync(usuario, Roles.Propietario.ToString());
+				return new Response<string>(usuario.Id, message: $"Usuario registrado exitosamente!. {request.UserName}");
+			}
+			else
+			{
+				throw new ApiException($"{result.Errors}.");
+			}
+		}
+
+
+
 
 		private async Task<JwtSecurityToken> GenerateJWToken(Usuario usuario)
 		{

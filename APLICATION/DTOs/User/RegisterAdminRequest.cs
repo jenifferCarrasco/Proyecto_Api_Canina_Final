@@ -2,7 +2,7 @@
 
 namespace APLICATION.DTOs.User
 {
-	public class RegisterRequest
+	public class RegisterAdminRequest
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -10,6 +10,5 @@ namespace APLICATION.DTOs.User
         public string Email { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
     }
 }

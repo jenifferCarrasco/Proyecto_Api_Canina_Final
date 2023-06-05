@@ -23,7 +23,7 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.CreateVacunacionCommand
                     .NotEmpty().WithMessage("Fecha Nacimiento no puede ser vacio");
             RuleFor(p => p.Dosis)
                     .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
-                    .MaximumLength(15).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracter");
+                    .MaximumLength(15).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
 
 
         }

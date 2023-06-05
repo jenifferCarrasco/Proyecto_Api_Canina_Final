@@ -1,33 +1,29 @@
 ﻿using APLICATION.Wrappers;
 using Application.Interface;
-using AutoMapper;
 using DOMAIN.Canina;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace APLICATION.Feauters.Centros.Commands.UpdateCentroCommand
 {
-    public class UpdateCentroCommand : IRequest<Response<Guid>>
+	public class UpdateCentroCommand : IRequest<Response<Guid>>
     {
         public Guid Id { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
-        public Estados Estatus { get; set; }
+        public Estados Estatus { get; set; } = Estados.Activo;
     }
     public class UpdateCentroCommandHandler : IRequestHandler<UpdateCentroCommand, Response<Guid>>
     {
 
         private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Centro> _repositoryAsync;
-        private readonly IMapper _mapper;
 
-        public UpdateCentroCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Centro> repositoryAsync, IMapper mapper = null)
+        public UpdateCentroCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Centro> repositoryAsync)
         {
             _repositoryAsync = repositoryAsync;
-            _mapper = mapper;
         }
 
 

@@ -9,19 +9,19 @@ namespace APLICATION.Feauters.Propietarios.Commands.CreateCommand
         {
             RuleFor(p => p.Nombre)
                     .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
-                    .MaximumLength(80).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracter");
+                    .MaximumLength(80).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
             RuleFor(p => p.Apellido)
                     .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
-                    .MaximumLength(80).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracter");
+                    .MaximumLength(80).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
             RuleFor(p => p.Direccion)
                     .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
-                    .MaximumLength(100).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracter");
+                    .MaximumLength(100).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
             RuleFor(p => p.Cedula)
                     .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
-                    .MaximumLength(13).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracter");
+                    .MaximumLength(13).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
             RuleFor(p => p.Telefono)
                     .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
-                    .MaximumLength(12).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracter");
+                    .MaximumLength(12).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
 
 
 
