@@ -1,12 +1,13 @@
 ﻿using APLICATION.Enum;
 using DOMAIN.Canina.Entities;
+using DOMAIN.Canina.Enum;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PERSISTENCE.Canina.Seeds
 {
-	public static class DefaultPacienteUser
+	public static class DefaultPropietarioUser
     {
         public static async Task SeedAsync(UserManager<Usuario> userManager)
         {
@@ -19,6 +20,7 @@ namespace PERSISTENCE.Canina.Seeds
                     Cedula = "40211098734",
                     Direccion = "Santo Domingo Este",
                     Telefono = "8097654562",
+                    Sexo = Generos.Femenino
                 },
                 TipoUsuario = UserType.Propietario.ToString(),
                 UserName = "userPropietario",

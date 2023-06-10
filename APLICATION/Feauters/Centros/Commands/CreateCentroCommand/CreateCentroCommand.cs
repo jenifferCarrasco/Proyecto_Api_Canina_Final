@@ -1,7 +1,6 @@
 ﻿using APLICATION.Wrappers;
 using Application.Interface;
 using AutoMapper;
-using DOMAIN.Canina;
 using DOMAIN.Canina.Entities;
 using MediatR;
 using System;

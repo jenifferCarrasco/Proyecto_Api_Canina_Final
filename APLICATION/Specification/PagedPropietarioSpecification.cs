@@ -1,5 +1,6 @@
 ﻿using Ardalis.Specification;
 using DOMAIN.Canina.Entities;
+using System;
 
 namespace APLICATION.Specification
 {
@@ -7,6 +8,8 @@ namespace APLICATION.Specification
     {
         public PagedPropietarioSpecification(int pageSize, int pageNumber, string nombre, string cedula)
         {
+            Query.Include(x => x.Usuario);
+
             Query.Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);
 
@@ -16,5 +19,12 @@ namespace APLICATION.Specification
                 Query.Search(x => x.Cedula, "%" + cedula + "%");
 
         }
-    }
+
+		public PagedPropietarioSpecification(Guid propietarioId)
+		{
+            Query.Where(x => x.Id == propietarioId)
+            .Include(x => x.Caninos);
+
+		}
+	}
 }

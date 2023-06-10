@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DOMAIN.Canina
+﻿namespace DOMAIN.Canina
 {
-    public enum Estados
+	public enum Estados
     {
-        Activo,
-        Inactivo
-
+        Activo = 1,
+        Inactivo = 2,
     }
 }

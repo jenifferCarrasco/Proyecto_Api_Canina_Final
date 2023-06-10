@@ -14,7 +14,7 @@ namespace APLICATION.Feauters.Centros.Commands.UpdateCentroCommand
         public Guid Id { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
-        public Estados Estatus { get; set; } = Estados.Activo;
+        public Estados Estatus { get; set; }
     }
     public class UpdateCentroCommandHandler : IRequestHandler<UpdateCentroCommand, Response<Guid>>
     {

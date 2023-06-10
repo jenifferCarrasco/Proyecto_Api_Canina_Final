@@ -1,18 +1,17 @@
 ﻿using APLICATION.DTOs;
-using Application.Interface;
 using APLICATION.Wrappers;
+using Application.Interface;
 using AutoMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace APLICATION.Feauters.Propietarios.Queries.GetPropietarioById
 {
-  
-    public class GetPropietarioByIdQuery : IRequest<Response<PropietariosDto>>
+
+	public class GetPropietarioByIdQuery : IRequest<Response<PropietariosDto>>
     {
         public Guid Id { get; set; }
         public class GetPropietarioByIdQueryHandler : IRequestHandler<GetPropietarioByIdQuery, Response<PropietariosDto>>

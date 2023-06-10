@@ -34,15 +34,15 @@ namespace APLICATION.Feauters.Authenticate.Command.RegisterPropietarioCommand
         {
             return await _accountService.RegisterPropietariosAsync(new RegisterPropietarioRequest
             {
+                Nombre = request.Nombre,
+                Apellido = request.Apellido,
                 Cedula = request.Cedula,
+                Sexo = request.Sexo,
                 Direccion = request.Direccion,
                 Telefono = request.Telefono,
-                Sexo = request.Sexo,
                 Email = request.Email,
                 Password = request.Password,
                 UserName = request.UserName,
-                Nombre = request.Nombre,
-                Apellido = request.Apellido,
             }, request.Origin);
         }
     }

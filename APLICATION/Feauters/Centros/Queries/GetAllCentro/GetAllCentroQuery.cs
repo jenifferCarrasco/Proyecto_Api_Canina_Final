@@ -34,7 +34,10 @@ namespace APLICATION.Feauters.Centros.Queries.GetAllCentro
 			public async Task<PagedResponse<List<CentrosDto>>> Handle(GetAllCentroQuery request, CancellationToken cancellationToken)
 			{
 
-				var centros = await _repositoryAsync.ListAsync();
+				var centros = await _repositoryAsync.ListAsync(new PagedCentroSpecification(
+					request.PageSize,
+					request.PageNumber,
+					request.Nombre));
 
 				var clientdto = _mapper.Map<List<CentrosDto>>(centros);
 				return new PagedResponse<List<CentrosDto>>(clientdto, request.PageNumber, request.PageSize);

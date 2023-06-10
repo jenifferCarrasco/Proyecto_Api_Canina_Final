@@ -42,7 +42,9 @@ namespace PERSISTENCE.Canina.Services
 
 		public async Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, string ipAddress)
 		{
-			var usuario = await _context.Users.FirstOrDefaultAsync(x=>x.UserName ==request.Username)
+			var usuario = await _context.Users
+				.Include(x=>x.Propietario)
+				.FirstOrDefaultAsync(x => x.UserName == request.Username)
 				?? throw new ApiException($"No existe una cuenta registrada con {request.Username}.");
 
 			var result = await _singInManage.PasswordSignInAsync(usuario.UserName, request.Password,
@@ -57,7 +59,8 @@ namespace PERSISTENCE.Canina.Services
 			AuthenticationResponse response = new AuthenticationResponse
 			{
 				Id = usuario.Id,
-				JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+				PropietarioId = usuario?.Propietario?.Id.ToString() ?? null,
+				Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
 				Email = usuario.Email,
 				UserName = usuario.UserName
 			};
@@ -68,7 +71,7 @@ namespace PERSISTENCE.Canina.Services
 
 			var refreshToken = GenerateRefreshToken(ipAddress);
 			response.RefreshToken = refreshToken.Token;
-			return new Response<AuthenticationResponse>(response, $"Usuario Autenticado {usuario.UserName}");
+			return new Response<AuthenticationResponse>(response);
 
 		}
 
@@ -136,7 +139,7 @@ namespace PERSISTENCE.Canina.Services
 
 			var usuario = new Usuario
 			{
-				TipoUsuario = UserType.Administrador.ToString(),
+				TipoUsuario = UserType.Propietario.ToString(),
 				Email = request.Email,
 				UserName = request.UserName,
 				EmailConfirmed = true,
@@ -180,15 +183,20 @@ namespace PERSISTENCE.Canina.Services
 			}
 			string ipAddress = IpHelper.GetIpAddress();
 
+
+			if (usuario.Propietario != null)
+			{
+				userClaims.Add(new Claim("propietarioId", usuario.Propietario.Id.ToString()));
+			}
+
 			var claims = new[] {
 				new Claim(JwtRegisteredClaimNames.Sub, usuario.UserName),
-				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 				new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
-				new Claim("uid", usuario.Id),
-				new Claim("ip",ipAddress)
+				new Claim("usuarioId", usuario.Id),
+				new Claim("ip",ipAddress),
 			}
-			.Union(userClaims)
-			.Union(roleClaims);
+			.Union(userClaims).Union(roleClaims);
+
 
 			var symetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSetting.Key));
 			var signinCredencials = new SigningCredentials(symetricSecurityKey, SecurityAlgorithms.HmacSha256);

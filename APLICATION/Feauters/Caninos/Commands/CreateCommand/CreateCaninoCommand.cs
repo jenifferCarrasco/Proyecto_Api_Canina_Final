@@ -20,7 +20,6 @@ namespace APLICATION.Feauters.Canino.Commands.CreateCommand
 		public string Color { get; set; }
 		public DateTime FechaNacimiento { get; set; }
 		public Guid PropietarioId { get; set; }
-		public Estados Estatus { get; set; }
 
 
 	}

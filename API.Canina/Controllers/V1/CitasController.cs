@@ -1,8 +1,8 @@
-﻿using APLICATION.Feauters.Centros.Commands.CreateCentroCommand;
-using APLICATION.Feauters.Centros.Commands.DeleteCentroCommand;
-using APLICATION.Feauters.Centros.Commands.UpdateCentroCommand;
-using APLICATION.Feauters.Centros.Queries.GetAllCentro;
-using APLICATION.Feauters.Centros.Queries.GetCentroById;
+﻿using APLICATION.Feauters.Citas.Commands.CreateCitasCommand;
+using APLICATION.Feauters.Citas.Commands.DeleteCitasCommand;
+using APLICATION.Feauters.Citas.Commands.UpdateCitasCommand;
+using APLICATION.Feauters.Citas.Queries.GetAllCitas;
+using APLICATION.Feauters.Citas.Queries.GetCitasById;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,17 +12,18 @@ namespace API.Canina.Controllers.v1
 {
 
 	[ApiVersion("1.0")]
-    public class CentroController : BaseApiController
+    public class CitasController : BaseApiController
     {
         //Get api/<controller>
         [HttpGet()]
-        public async Task<IActionResult> GetAll([FromQuery] GetAllCentroParameter filter)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllCitasParameter filter)
         {
-            return Ok(await Mediator.Send(new GetAllCentroQuery
+            return Ok(await Mediator.Send(new GetAllCitasQuery
             {
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize,
-                Nombre = filter.Nombre
+                FechaCita = filter.FechaCita,
+                CaninoId = filter.CaninoId
             }));
         }
 
@@ -30,20 +31,22 @@ namespace API.Canina.Controllers.v1
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            return Ok(await Mediator.Send(new GetCentroByIdQuery { Id = id }));
+            return Ok(await Mediator.Send(new GetCitasByIdQuery { Id = id }));
         }
 
         //POST api/<controller>
         [HttpPost]
         //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Post(CreateCentroCommand createClientCommand)
+        //[Authorize(Roles = "Moderador")]
+        public async Task<IActionResult> Post(CreateCitaCommand createClientCommand)
         {
             return Ok(await Mediator.Send(createClientCommand));
         }
         //PUT api/<controller>/5
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Put(Guid id, UpdateCentroCommand updateClientCommand)
+        [Authorize(Roles = "Moderador")]
+        public async Task<IActionResult> Put(Guid id, UpdateCitasCommand updateClientCommand)
         {
             if (id != updateClientCommand.Id)
                 return BadRequest();
@@ -52,10 +55,11 @@ namespace API.Canina.Controllers.v1
         //DELETE api/<controller>/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Moderador")]
         public async Task<IActionResult> Delete(Guid id)
         {
 
-            return Ok(await Mediator.Send(new DeleteCentroCommand { Id = id }));
+            return Ok(await Mediator.Send(new DeleteCitasCommand { Id = id }));
         }
     }
 }

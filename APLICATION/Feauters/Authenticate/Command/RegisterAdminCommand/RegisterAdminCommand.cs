@@ -13,7 +13,7 @@ namespace APLICATION.Feauters.Authenticate.Command.RegisterAdminCommand
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
-        public Roles? Rol { get; set; }
+        public Roles? Rol { get; set; } = Roles.Moderador;
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Origin { get; set; }

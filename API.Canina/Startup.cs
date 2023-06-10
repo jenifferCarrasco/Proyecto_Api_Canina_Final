@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using PERSISTENCE.Canina;
 using Shared;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace API.Canina
 {
@@ -29,7 +30,11 @@ namespace API.Canina
 			services.AddAplicationLayer();
 			services.AddSharedInfraestructure(Configuration);
 			services.AddPersistenceInfraestructure(Configuration);
-			services.AddControllers();
+			services.AddControllers().AddJsonOptions(json =>
+			{
+				//json.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+				json.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+			});
 			services.AddApiVersioningExtension();
 			services.AddValidatorsFromAssemblyContaining<Startup>();
 			services.AddControllers();

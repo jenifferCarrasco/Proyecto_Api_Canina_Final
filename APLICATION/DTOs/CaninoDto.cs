@@ -1,5 +1,4 @@
-﻿using DOMAIN.Canina;
-using System;
+﻿using System;
 
 namespace APLICATION.DTOs
 {

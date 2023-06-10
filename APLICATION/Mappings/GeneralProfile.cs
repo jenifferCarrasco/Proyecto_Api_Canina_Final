@@ -2,7 +2,6 @@
 using APLICATION.Feauters.Canino.Commands.CreateCommand;
 using APLICATION.Feauters.Centros.Commands.CreateCentroCommand;
 using APLICATION.Feauters.Citas.Commands.CreateCitasCommand;
-using APLICATION.Feauters.Propietarios.Commands.CreateCommand;
 using APLICATION.Feauters.Vacunaciones.Commands.CreateVacunacionCommand;
 using APLICATION.Feauters.Vacunadores.Commands.CreateCommand;
 using APLICATION.Feauters.Vacunas.Commands.CreateVacunaCommand;
@@ -29,6 +28,8 @@ namespace APLICATION.Mappings
 			CreateMap<CreateCaninoCommand, Canino>()
 				.ForMember(X => X.Estatus, act => act.MapFrom(_ => Estados.Activo));
 			#endregion
+
+
 			//centro
 			#region
 			CreateMap<Centro, CentrosDto>();
@@ -39,6 +40,8 @@ namespace APLICATION.Mappings
 				.ForMember(X => X.Estatus, act => act.MapFrom(_ => Estados.Activo));
 
 			#endregion
+
+
 			//citas
 			#region
 			CreateMap<Cita, CitasDto>();
@@ -70,11 +73,10 @@ namespace APLICATION.Mappings
 
 			//propietario
 			#region
-			CreateMap<Propietario, PropietariosDto>();
-			#endregion
+			CreateMap<Propietario, PropietariosDto>()
+				.ForMember(X => X.Sexo, act => act.MapFrom(x => x.Sexo.ToString()))
+				.ForMember(X => X.Email, act => act.MapFrom(x => x.Usuario.Email));
 
-			#region Commands
-			CreateMap<CreatePropietarioCommand, Propietario>();
 			#endregion
 
 			//vacunadores

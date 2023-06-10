@@ -13,7 +13,7 @@ namespace APLICATION.Feauters.Authenticate.Command.RegisterAdminCommand
                     .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
                     .MaximumLength(80).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
 
-            RuleFor(p => p.Email)
+			RuleFor(p => p.Email)
                      .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
                      .EmailAddress().WithMessage("{PropertyName} debe ser una direccion de correo valida")
                      .MaximumLength(100).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
