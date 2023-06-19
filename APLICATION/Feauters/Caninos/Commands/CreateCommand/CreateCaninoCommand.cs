@@ -2,7 +2,6 @@
 using APLICATION.Wrappers;
 using Application.Interface;
 using AutoMapper;
-using DOMAIN.Canina;
 using DOMAIN.Canina.Enum;
 using MediatR;
 using System;

@@ -1,23 +1,46 @@
-﻿using APLICATION.DTOs.User;
-using DOMAIN.Canina;
-using DOMAIN.Canina.Entities;
+﻿using DOMAIN.Canina;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace APLICATION.DTOs
 {
-    public class CitasDto
+	public class CitasDto
     {
-        public string Id { get; set; }
-        public string CentroId { get; set; }
-        public Centro Centro { get; set; }
-        public string VacunadorId { get; set; }
-        public Vacunador Vacunador { get; set; }
-        public string CaninoId { get; set; }
-        public Canino Canino { get; set; }
-        public Estados Estatus { get; set; }
-        public DateTime FechaCita { get; set; }
-    }
+		public Guid Id { get; set; }
+		public DateTime FechaCita { get; set; }
+		public Estados Estatus { get; set; }
+		public CitasCentroDto Centro { get; set; }
+		public CitasPropietarioDto Propietario { get; set; }
+		public CitasCaninoDto Canino { get; set; }
+		public CitasVacunadorDto Vacunador { get; set; }
+	}
+
+	public class CitasPropietarioDto
+	{
+		public Guid Id { get; set; }
+		public string Nombre { get; set; }
+		public string Apellido { get; set; }
+		public string NombreCompleto => $"{Nombre} {Apellido}";
+		public string Cedula { get; set; }
+	}
+	public class CitasCaninoDto
+	{
+		public Guid Id { get; set; }
+		public string Nombre { get; set; }
+		public Guid PropietarioId { get; set; }
+	}
+
+	public class CitasCentroDto
+	{
+		public Guid Id { get; set; }
+		public string Nombre { get; set; }
+	}
+
+	public class CitasVacunadorDto
+	{
+		public Guid Id { get; set; }
+		public string Nombre { get; set; }
+		public string Apellido { get; set; }
+		public string NombreCompleto => $"{Nombre} {Apellido}";
+	}
+
 }

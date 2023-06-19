@@ -15,5 +15,6 @@ namespace DOMAIN.Canina.Entities
         public string UsuarioId { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual ICollection<Canino> Caninos { get; set; }
-    }
+		public virtual ICollection<Cita> Citas { get; set; }
+	}
 }

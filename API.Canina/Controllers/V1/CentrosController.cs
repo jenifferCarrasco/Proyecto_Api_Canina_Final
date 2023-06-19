@@ -12,7 +12,7 @@ namespace API.Canina.Controllers.v1
 {
 
 	[ApiVersion("1.0")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
 
     public class CentrosController : BaseApiController
     {

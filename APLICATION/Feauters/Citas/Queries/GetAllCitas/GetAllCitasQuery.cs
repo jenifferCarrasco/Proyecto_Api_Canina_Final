@@ -16,8 +16,7 @@ namespace APLICATION.Feauters.Citas.Queries.GetAllCitas
 	{
 		public int PageNumber { get; set; }
 		public int PageSize { get; set; }
-		public DateTime FechaCita { get; set; }
-		public Guid CaninoId { get; set; }
+		public string CaninoId { get; set; }
 	}
 	public class GetAllCitasQueryHandler : IRequestHandler<GetAllCitasQuery, PagedResponse<List<CitasDto>>>
 	{
@@ -35,7 +34,7 @@ namespace APLICATION.Feauters.Citas.Queries.GetAllCitas
 		{
 
 			var citas = await _repositoryAsync.ListAsync(new PagedCitaSpecification(
-			request.PageNumber, request.PageSize, request.FechaCita, request.CaninoId));
+			request.PageNumber, request.PageSize, request.CaninoId));
 
 			var citasDto = _mapper.Map<List<CitasDto>>(citas);
 			return new PagedResponse<List<CitasDto>>(citasDto, request.PageNumber

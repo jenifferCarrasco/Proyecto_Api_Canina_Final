@@ -1,4 +1,5 @@
-﻿using APLICATION.Feauters.Propietarios.Queries.GetAllPropietario;
+﻿using APLICATION.Feauters.Citas.Queries.GetCitasByPropietarioId;
+using APLICATION.Feauters.Propietarios.Queries.GetAllPropietario;
 using APLICATION.Feauters.Propietarios.Queries.GetCaninosByPropietarioId;
 using APLICATION.Feauters.Propietarios.Queries.GetPropietarioById;
 using Microsoft.AspNetCore.Mvc;
@@ -39,5 +40,14 @@ namespace API.Canina.Controllers.v1
 				PropietarioId = propietarioId
 			}));
 		}
-    }
+
+		[HttpGet("{propietarioId}/Citas")]
+		public async Task<IActionResult> GetCitasByPropietarioId(Guid propietarioId)
+		{
+			return Ok(await Mediator.Send(new GetCitasByPropietarioIdQuery
+			{
+				PropietarioId = propietarioId
+			}));
+		}
+	}
 }

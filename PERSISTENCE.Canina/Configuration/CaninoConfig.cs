@@ -32,6 +32,12 @@ namespace PERSISTENCE.Canina.Configuration
             builder.Property(p => p.LastModifiedBy)
                 .HasMaxLength(30);
 
-        }
+			builder
+				.HasOne(c => c.Propietario)
+				.WithMany(p => p.Caninos)
+				.HasForeignKey(c => c.PropietarioId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+		}
     }
 }

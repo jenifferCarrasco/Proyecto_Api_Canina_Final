@@ -13,5 +13,7 @@ namespace DOMAIN.Canina.Entities
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public ICollection<Vacunacion> Vacunaciones { get; set; }
-    }
+
+		public ICollection<Cita> Citas { get; set; }
+	}
 }

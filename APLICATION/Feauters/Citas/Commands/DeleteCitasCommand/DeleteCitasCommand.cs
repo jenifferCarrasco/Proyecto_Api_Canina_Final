@@ -4,13 +4,12 @@ using AutoMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace APLICATION.Feauters.Citas.Commands.DeleteCitasCommand
 {
-    public class DeleteCitasCommand : IRequest<Response<Guid>>
+	public class DeleteCitasCommand : IRequest<Response<Guid>>
     {
         public Guid Id { get; set; }
     }

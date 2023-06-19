@@ -11,7 +11,9 @@ namespace DOMAIN.Canina.Entities
         public virtual Vacunador Vacunador { get; set; }
         public Guid CaninoId { get; set; }
         public virtual Canino Canino { get; set; }
-        public Estados Estatus { get; set; }
+		public Guid PropietarioId { get; set; }
+		public virtual Propietario Propietario { get; set; }
+		public Estados Estatus { get; set; }
         public DateTime FechaCita { get; set; }
 
     }

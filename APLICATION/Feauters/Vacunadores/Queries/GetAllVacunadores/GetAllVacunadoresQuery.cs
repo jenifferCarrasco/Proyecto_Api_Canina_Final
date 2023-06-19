@@ -35,7 +35,7 @@ namespace APLICATION.Feauters.Vacunadores.Queries.GetAllVacunadores
 			{
 
 				var vacunadores = await _repositoryAsync.ListAsync(new PagedVacunadoresSpecification(
-				request.PageNumber, request.PageSize, request.Nombre, request.Cedula));
+				request.PageSize, request.PageNumber,  request.Nombre, request.Cedula));
 
 				var vacunadoresDto = _mapper.Map<List<VacunadoresDto>>(vacunadores);
 				return new PagedResponse<List<VacunadoresDto>>(vacunadoresDto, request.PageNumber

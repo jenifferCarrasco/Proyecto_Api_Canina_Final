@@ -1,10 +1,12 @@
 ﻿using APLICATION.DTOs;
+using APLICATION.Specification;
 using APLICATION.Wrappers;
 using Application.Interface;
 using AutoMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,7 +29,7 @@ namespace APLICATION.Feauters.Citas.Queries.GetCitasById
 
 			public async Task<Response<CitasDto>> Handle(GetCitasByIdQuery request, CancellationToken cancellationToken)
 			{
-				var cita = await _repositoryAsync.GetByIdAsync(request.Id) ??
+				var cita = (await _repositoryAsync.ListAsync(new PagedCitaSpecification(request.Id))).FirstOrDefault() ??
 					throw new KeyNotFoundException($"Registro no encontrado con el id {request.Id}");
 
 				var dto = _mapper.Map<CitasDto>(cita);

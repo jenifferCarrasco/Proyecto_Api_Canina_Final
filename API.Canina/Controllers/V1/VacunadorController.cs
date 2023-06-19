@@ -48,8 +48,8 @@ namespace API.Canina.Controllers.v1
         }
         //PUT api/<controller>/5
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Moderador")]
+        //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Moderador")]
         public async Task<IActionResult> Put(Guid id, UpdateVacunadoresCommand updateClientCommand)
         {
             if (id != updateClientCommand.Id)
@@ -58,8 +58,8 @@ namespace API.Canina.Controllers.v1
         }
         //DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Moderador")]
+        //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Moderador")]
         public async Task<IActionResult> Delete(Guid id)
         {
 

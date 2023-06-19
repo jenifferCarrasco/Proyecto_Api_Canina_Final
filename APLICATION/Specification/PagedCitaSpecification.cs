@@ -1,23 +1,45 @@
 ﻿using Ardalis.Specification;
+using DOMAIN.Canina;
 using DOMAIN.Canina.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace APLICATION.Specification
 {
-    public class PagedCitaSpecification : Specification<Cita>
-    {
-        public PagedCitaSpecification(int pageSize, int pageNumber, DateTime fecha, Guid centro)
-        {
-            Query.Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize);
+	public class PagedCitaSpecification : Specification<Cita>
+	{
+		public PagedCitaSpecification(int pageNumber, int pageSize, string centro)
+		{
+			Query.Where(x => x.Estatus == Estados.Activo)
+				.Include(x => x.Canino)
+				.Include(x => x.Centro)
+				.Include(x => x.Vacunador)
+				.Include(x => x.Propietario);
 
-            if (fecha != null)
-                Query.Search(x => Convert.ToString(x.FechaCita), "%" + fecha + "%");
-            if (centro != null)
-                Query.Search(x => Convert.ToString(x.CentroId), "%" + centro + "%");
+			Query.Skip((pageNumber - 1) * pageSize)
+				.Take(pageSize);
 
-        }
-    }
+
+			if (centro != null)
+				Query.Search(x => x.CentroId.ToString(), "%" + centro + "%");
+
+		}
+
+		public PagedCitaSpecification(Guid id)
+		{
+			Query.Where(x => x.Id == id)
+				.Include(x => x.Canino)
+				.Include(x => x.Centro)
+				.Include(x => x.Vacunador)
+				.Include(x => x.Propietario);
+		}
+
+		public PagedCitaSpecification(Guid propietarioId, int? id)
+		{
+			Query.Where(x => x.Propietario.Id == propietarioId && x.Estatus == Estados.Activo)
+				.Include(x => x.Canino)
+				.Include(x => x.Centro)
+				.Include(x => x.Vacunador)
+				.Include(x => x.Propietario);
+		}
+	}
 }

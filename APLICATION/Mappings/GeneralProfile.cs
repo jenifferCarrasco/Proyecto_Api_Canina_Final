@@ -45,10 +45,16 @@ namespace APLICATION.Mappings
 			//citas
 			#region
 			CreateMap<Cita, CitasDto>();
+			CreateMap<Canino, CitasCaninoDto>();
+			CreateMap<Vacunador, CitasVacunadorDto>();
+			CreateMap<Centro, CitasCentroDto>();
+			CreateMap<Propietario, CitasPropietarioDto>();
+
 			#endregion
 
 			#region Commands
-			CreateMap<CreateCitaCommand, Cita>();
+			CreateMap<CreateCitaCommand, Cita>()
+				.ForMember(x => x.Estatus, act => act.MapFrom(_ => Estados.Activo));
 			#endregion
 			//vacunaciones
 			#region

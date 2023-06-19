@@ -6,7 +6,6 @@ namespace DOMAIN.Canina.Entities
 {
 	public class Vacunacion : AuditableBaseEntity
     {
-
         public Guid CentroId { get; set; }
         public virtual Centro Centro { get; set; }
         public Guid VacunadorId { get; set; }
