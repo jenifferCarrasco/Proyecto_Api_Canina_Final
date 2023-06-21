@@ -39,6 +39,7 @@ namespace API.Canina
 			services.AddValidatorsFromAssemblyContaining<Startup>();
 			services.AddControllers();
 			services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+			services.AddCors();
 
 			services.AddSwaggerGen(c =>
 			{
@@ -55,7 +56,13 @@ namespace API.Canina
 				app.UseSwagger();
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api_Canina v1"));
 			}
-
+			
+			app.UseCors(builder =>
+			{
+				builder.WithOrigins("http://localhost:4200")
+					   .AllowAnyHeader()
+					   .AllowAnyMethod();
+			});
 			app.UseHttpsRedirection();
 
 			app.UseRouting();
