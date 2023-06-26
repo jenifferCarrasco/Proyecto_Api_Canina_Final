@@ -19,7 +19,7 @@ namespace APLICATION.Mappings
 			//canino
 			#region
 			CreateMap<Canino, CaninoDto>()
-				.ForMember(X => X.Sexo, act => act.MapFrom(x=>x.Sexo.ToString()))
+				.ForMember(X => X.Sexo, act => act.MapFrom(x => x.Sexo.ToString()))
 				.ForMember(X => X.Estatus, act => act.MapFrom(x => x.Estatus.ToString()));
 
 			#endregion
@@ -61,16 +61,29 @@ namespace APLICATION.Mappings
 			CreateMap<Vacunacion, VacunacionesDto>();
 			#endregion
 
-			#region Commands
-			CreateMap<CreateVacunacionCommand, Vacunacion>();
-			#endregion
 			//vacunas
+
+			#region Commands
+
+			CreateMap<CreateVacunacionCommand, Vacunacion>();
+
+			#endregion
+
 			#region
-			CreateMap<Vacuna, VacunasDto>();
+
+			CreateMap<Vacuna, VacunasDto>()
+				.ForMember(x => x.Nombre, dest => dest.MapFrom(x => $"{x.Nombre}-{x.Lote}"))
+				.ForMember(x => x.CantidadDisponible,
+				dest => dest.MapFrom(x => x.VacunaInventario.CantidadDisponible));
+
 			#endregion
 
 			#region Commands
-			CreateMap<CreateVacunaCommand, Vacuna>();
+
+			CreateMap<CreateVacunaCommand, Vacuna>()
+				.ForMember(x => x.Lote, dest => dest.MapFrom(x => x.Lote.ToUpper()))
+				.ForMember(x => x.Estatus, dest => dest.MapFrom(_=> Estados.Activo));
+
 			#endregion
 
 			#region 

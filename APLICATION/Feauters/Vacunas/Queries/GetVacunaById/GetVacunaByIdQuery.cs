@@ -1,25 +1,25 @@
 ﻿using APLICATION.DTOs;
-using Application.Interface;
 using APLICATION.Wrappers;
+using Application.Interface;
 using AutoMapper;
+using DOMAIN.Canina.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace APLICATION.Feauters.Vacunas.Queries.GetVacunaById
 {
-    public class GetVacunaByIdQuery: IRequest<Response<VacunasDto>>
+	public class GetVacunaByIdQuery: IRequest<Response<VacunasDto>>
     {
         public Guid Id { get; set; }
         public class GetVacunaByIdQueryHandler : IRequestHandler<GetVacunaByIdQuery, Response<VacunasDto>> {
 
-            private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacuna> _repositoryAsync;
+            private readonly IRepositoryAsync<Vacuna> _repositoryAsync;
             private readonly IMapper _mapper;
 
-            public GetVacunaByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacuna> repositoryAsync, IMapper mapper)
+            public GetVacunaByIdQueryHandler(IRepositoryAsync<Vacuna> repositoryAsync, IMapper mapper)
             {
                 _repositoryAsync = repositoryAsync;
                 _mapper = mapper;

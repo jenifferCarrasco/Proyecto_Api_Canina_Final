@@ -1,5 +1,6 @@
 ﻿using APLICATION.Feauters.Vacunas.Commands.CreateVacunaCommand;
 using APLICATION.Feauters.Vacunas.Commands.DeleteVacunaCommand;
+using APLICATION.Feauters.Vacunas.Commands.UpdateInventarioCommand;
 using APLICATION.Feauters.Vacunas.Commands.UpdateVacunaCommand;
 using APLICATION.Feauters.Vacunas.Queries.GetAllVacuna;
 using APLICATION.Feauters.Vacunas.Queries.GetVacunaById;
@@ -22,7 +23,6 @@ namespace API.Canina.Controllers.v1
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize,
                 Nombre = filter.Nombre,
-                Laboratorio = filter.Laboratorio
             }));
         }
 
@@ -40,8 +40,18 @@ namespace API.Canina.Controllers.v1
         {
             return Ok(await Mediator.Send(createClientCommand));
         }
-        //PUT api/<controller>/5
-        [HttpPut("{id}")]
+
+		[HttpPut("Inventario/{id}")]
+		//[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Put(Guid id, UpdateInventarioCommand command)
+		{
+			if (id != command.Id)
+				return BadRequest();
+			return Ok(await Mediator.Send(command));
+		}
+
+		//PUT api/<controller>/5
+		[HttpPut("{id}")]
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put(Guid id, UpdateVacunaCommand updateClientCommand)
         {
