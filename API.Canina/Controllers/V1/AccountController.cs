@@ -1,5 +1,6 @@
 ﻿using APLICATION.DTOs.User;
 using APLICATION.Feauters.Authenticate.Command.AuthenticateCommand;
+using APLICATION.Feauters.Authenticate.Command.PasswordRecoveryCommand;
 using APLICATION.Feauters.Authenticate.Command.RegisterAdminCommand;
 using APLICATION.Feauters.Authenticate.Command.RegisterPropietarioCommand;
 using Microsoft.AspNetCore.Http;
@@ -54,6 +55,12 @@ namespace API.Canina.Controllers
 				UserName = request.UserName,
 				Origin = Request.Headers["origin"]
 			}));
+		}
+
+		[HttpPost("RecuperarContrasena")]
+		public async Task<IActionResult> RegisterPropietarioAsync(PasswordRecoveryCommand command)
+		{
+			return Ok(await Mediator.Send(command));
 		}
 
 		private string GenerateIPAddress()

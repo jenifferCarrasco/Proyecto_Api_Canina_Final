@@ -5,6 +5,7 @@ using APLICATION.Interface;
 using APLICATION.Wrappers;
 using DOMAIN.Canina.Entities;
 using DOMAIN.Canina.Setting;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -28,16 +29,19 @@ namespace PERSISTENCE.Canina.Services
 		private readonly SignInManager<Usuario> _singInManage;
 		private readonly JWTSetting _jwtSetting;
 		private readonly ApplicationDbContext _context;
+		private readonly IEmailService _emailService;
 
 		public AccountService(UserManager<Usuario> userManage,
 			IOptions<JWTSetting> jwtSetting = null,
 			SignInManager<Usuario> singInManage = null,
-			ApplicationDbContext context = null)
+			ApplicationDbContext context = null,
+			IEmailService emailService = null)
 		{
 			_userManage = userManage;
 			_jwtSetting = jwtSetting.Value;
 			_singInManage = singInManage;
 			_context = context;
+			_emailService = emailService;
 		}
 
 		public async Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, string ipAddress)
@@ -167,9 +171,35 @@ namespace PERSISTENCE.Canina.Services
 			}
 		}
 
+		public async Task<Response<string>> PasswordRecovery(string email)
+		{
+			var user = _context.Users.Where(x => x.Email == email).FirstOrDefault() ??
+				throw new ApiException("Este email no fue encontrado");
 
+			await _userManage.RemovePasswordAsync(user);
 
+			var newPassword = PasswordHelper.GeneratePassword(10);
+			var addNewPassword = await _userManage.AddPasswordAsync(user, newPassword);
 
+			if (!addNewPassword.Succeeded)
+			{
+				throw new ApiException($"No se pudo reestablecer la contraseña de este usuario");
+			}
+
+			var template = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n <title>Recuperación de Contraseña</title>\r\n</head>\r\n<body>\r\n <h1>Recuperación de Contraseña</h1>\r\n <p>Hola {{username}}.</p>\r\n \r\n\r\n <p>Tu nueva contraseña ha sido generada. Utiliza la siguiente contraseña para iniciar sesión y luego cambia tu contraseña en tu perfil.</p>\r\n \r\n <p>Contraseña: <strong>{{password}}</strong></p>\r\n</body>\r\n</html>\r\n";
+			
+			template = template.Replace("{{username}}", user.UserName);
+			template = template.Replace("{{password}}", newPassword);
+			string subject = "Recuperación de Contraseña";
+
+			bool sentEmail = await _emailService.SendEmailAsync(email,subject, template);
+			if (!sentEmail)
+			{
+				throw new ApiException("No pudo ser enviado el correo con su nueva contraseña");
+			}
+
+			return new Response<string>(user.Id, $"Se ha enviado un correo a {user.Email}");
+		}
 		private async Task<JwtSecurityToken> GenerateJWToken(Usuario usuario)
 		{
 

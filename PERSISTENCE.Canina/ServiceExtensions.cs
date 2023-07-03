@@ -51,9 +51,14 @@ namespace PERSISTENCE.Canina
                 options.Configuration = configuration.GetValue<string>("Caching:RedisConnection");
             });
             #endregion
+
             #region Services
+
             service.AddTransient<IAccountService, AccountService>();
+            service.AddScoped<IEmailService,EmailService>();
+
             #endregion
+
             service.Configure<JWTSetting>(configuration.GetSection("JWTSetting"));
             service.AddAuthentication(options =>
             {
