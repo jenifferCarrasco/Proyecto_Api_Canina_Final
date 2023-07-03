@@ -1,30 +1,21 @@
-﻿using APLICATION.Exceptions;
+﻿using APLICATION.Wrappers;
 using Application.Interface;
-using APLICATION.Wrappers;
-using AutoMapper;
+using DOMAIN.Canina.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
-using DOMAIN.Canina.Entities;
 
 namespace APLICATION.Feauters.Vacunaciones.Commands.UpdateVacunacionCommand
 {
-    
-    public class UpdateVacunacionCommand : IRequest<Response<Guid>>
+	public class UpdateVacunacionCommand : IRequest<Response<Guid>>
     {
         public Guid Id { get; set; }
         public Guid CentroId { get; set; }
-        public Centro Centro { get; set; }
         public Guid VacunadorId { get; set; }
-        public Vacunador Vacunador { get; set; }
         public Guid VacunaId { get; set; }
-        public Vacuna Vacuna { get; set; }
         public Guid CaninoId { get; set; }
-        public DOMAIN.Canina.Entities.Canino Canino { get; set; }
         public string Dosis { get; set; }
         public DateTime FechaProxima { get; set; }
 
@@ -32,13 +23,10 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.UpdateVacunacionCommand
     public class UpdateVacunacionCommandHandler : IRequestHandler<UpdateVacunacionCommand, Response<Guid>>
     {
 
-        private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Vacunacion> _repositoryAsync;
-        private readonly IMapper _mapper;
-
-        public UpdateVacunacionCommandHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Vacunacion> repositoryAsync, IMapper mapper = null)
+        private readonly IRepositoryAsync<Vacunacion> _repositoryAsync;
+        public UpdateVacunacionCommandHandler(IRepositoryAsync<Vacunacion> repositoryAsync)
         {
             _repositoryAsync = repositoryAsync;
-            _mapper = mapper;
         }
 
 

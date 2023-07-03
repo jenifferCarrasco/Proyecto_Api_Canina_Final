@@ -36,7 +36,7 @@ namespace APLICATION.Feauters.Vacunaciones.Queries.GetAllVacunacion
 			{
 
 				var vacunaciones = await _repositoryAsync.ListAsync(new PagedVacunacionSpecification(
-				request.PageNumber, request.PageSize, request.CaninoId, request.VacunadorId));
+				request.PageSize, request.PageNumber, request.CaninoId, request.VacunadorId));
 
 				var vacunacionesDto = _mapper.Map<List<VacunacionesDto>>(vacunaciones);
 				return new PagedResponse<List<VacunacionesDto>>(vacunacionesDto, request.PageNumber

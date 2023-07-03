@@ -11,16 +11,16 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.CreateVacunacionCommand
         public CreateVacunacionCommandValidator()
         {
            
-            RuleFor(p => p.FechaProxima)
-                    .NotEmpty().WithMessage("Fecha Nacimiento no puede ser vacio");
             RuleFor(p => p.CentroId)
-                    .NotEmpty().WithMessage("Fecha Nacimiento no puede ser vacio");
+                    .NotEmpty().WithMessage("El centroId no puede ser vacio");
             RuleFor(p => p.CaninoId)
-                    .NotEmpty().WithMessage("Fecha Nacimiento no puede ser vacio");
+                    .NotEmpty().WithMessage("El caninoId no puede ser vacio");
             RuleFor(p => p.VacunadorId)
-                    .NotEmpty().WithMessage("Fecha Nacimiento no puede ser vacio");
+                    .NotEmpty().WithMessage("El vacunadorId no puede ser vacio");
             RuleFor(p => p.VacunaId)
-                    .NotEmpty().WithMessage("Fecha Nacimiento no puede ser vacio");
+                    .NotEmpty().WithMessage("La vacunaId no puede ser vacio");
+            RuleFor(p => p.FechaProxima)
+                    .NotEmpty().WithMessage("Fecha Proxima no puede ser vacio");
             RuleFor(p => p.Dosis)
                     .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
                     .MaximumLength(15).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
