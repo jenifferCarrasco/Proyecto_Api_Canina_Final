@@ -16,9 +16,8 @@ namespace APLICATION.Feauters.Vacunaciones.Queries.GetAllVacunacion
 	{
 		public int PageNumber { get; set; }
 		public int PageSize { get; set; }
+		public string NombreCanino { get; set; }
 
-		public Guid CaninoId { get; set; }
-		public Guid VacunadorId { get; set; }
 
 		public class GetAllVacunacionQueryHandler : IRequestHandler<GetAllVacunacionQuery, PagedResponse<List<VacunacionesDto>>>
 		{
@@ -34,11 +33,11 @@ namespace APLICATION.Feauters.Vacunaciones.Queries.GetAllVacunacion
 
 			public async Task<PagedResponse<List<VacunacionesDto>>> Handle(GetAllVacunacionQuery request, CancellationToken cancellationToken)
 			{
-
 				var vacunaciones = await _repositoryAsync.ListAsync(new PagedVacunacionSpecification(
-				request.PageSize, request.PageNumber, request.CaninoId, request.VacunadorId));
+				request.PageSize, request.PageNumber, request.NombreCanino));
 
 				var vacunacionesDto = _mapper.Map<List<VacunacionesDto>>(vacunaciones);
+
 				return new PagedResponse<List<VacunacionesDto>>(vacunacionesDto, request.PageNumber
 					, request.PageSize);
 			}

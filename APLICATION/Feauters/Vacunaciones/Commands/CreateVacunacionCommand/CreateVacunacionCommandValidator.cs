@@ -22,8 +22,7 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.CreateVacunacionCommand
             RuleFor(p => p.FechaProxima)
                     .NotEmpty().WithMessage("Fecha Proxima no puede ser vacio");
             RuleFor(p => p.Dosis)
-                    .NotEmpty().WithMessage("{PropertyName} no puede ser vacio")
-                    .MaximumLength(15).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres");
+                    .NotEmpty().WithMessage("{PropertyName} no puede ser vacio");
 
 
         }

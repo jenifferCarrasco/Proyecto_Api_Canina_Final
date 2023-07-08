@@ -2,6 +2,7 @@
 using APLICATION.Feauters.Canino.Queries.GetAllCanino;
 using APLICATION.Feauters.Caninos.Commands.UpdateCommand;
 using APLICATION.Feauters.Caninos.Queries.GetAllCanino;
+using APLICATION.Feauters.Caninos.Queries.GetAllVacunacionesByCaninoId;
 using APLICATION.Feauters.Caninos.Queries.GetCaninoById;
 using APLICATION.Feauters.Clientes.Commands.DeleteClientCommand;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,15 @@ namespace API.Canina.Controllers.v1
 				PageSize = filter.PageSize,
 				Nombre = filter.Nombre,
 				Raza = filter.Raza
+			}));
+		}
+
+		[HttpGet("{caninoId}/Vacunaciones")]
+		public async Task<IActionResult> GetAllVacunaciones([FromRoute] Guid caninoId)
+		{
+			return Ok(await Mediator.Send(new GetAllVacunacionesByCaninoIdQuery
+			{
+				CaninoId = caninoId
 			}));
 		}
 

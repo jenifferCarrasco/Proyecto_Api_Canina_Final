@@ -59,13 +59,21 @@ namespace APLICATION.Mappings
 			//vacunaciones
 			#region
 			CreateMap<Vacunacion, VacunacionesDto>();
+			CreateMap<Canino, VacunacionCaninoDto>();
+			CreateMap<Vacunador, VacunacionVacunadorDto>()
+				.ForMember(x => x.Nombre, src => src.MapFrom(x => $"{x.Nombre} {x.Apellido}"));
+			CreateMap<Vacuna, VacunacionVacunaDto>();
+			CreateMap<Centro, VacunacionCentroDto>();
 			#endregion
 
 			//vacunas
 
 			#region Commands
 
-			CreateMap<CreateVacunacionCommand, Vacunacion>();
+			CreateMap<CreateVacunacionCommand, Vacunacion>()
+				.ForMember(x => x.Dosis, src => src.MapFrom(x => ObtenerDosis(x.Dosis)));
+
+
 
 			#endregion
 
@@ -82,7 +90,7 @@ namespace APLICATION.Mappings
 
 			CreateMap<CreateVacunaCommand, Vacuna>()
 				.ForMember(x => x.Lote, dest => dest.MapFrom(x => x.Lote.ToUpper()))
-				.ForMember(x => x.Estatus, dest => dest.MapFrom(_=> Estados.Activo));
+				.ForMember(x => x.Estatus, dest => dest.MapFrom(_ => Estados.Activo));
 
 			#endregion
 
@@ -107,5 +115,19 @@ namespace APLICATION.Mappings
 			CreateMap<CreateVacunadoresCommand, Vacunador>();
 			#endregion
 		}
+		private string ObtenerDosis(int dosis)
+		{
+			return dosis switch
+			{
+				1 => "1ra",
+				2 => "2da",
+				3 => "3ra",
+				4 => "4ta",
+				5 => "5ta",
+				_ => string.Empty
+			};
+		}
 	}
+
+
 }

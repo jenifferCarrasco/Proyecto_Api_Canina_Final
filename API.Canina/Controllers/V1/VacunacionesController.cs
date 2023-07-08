@@ -12,7 +12,7 @@ namespace API.Canina.Controllers.v1
 {
 
 	[ApiVersion("1.0")]
-    public class VacunacionController : BaseApiController
+    public class VacunacionesController : BaseApiController
     {
         //Get api/<controller>
         [HttpGet()]
@@ -22,8 +22,7 @@ namespace API.Canina.Controllers.v1
             {
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize,
-                VacunadorId = filter.VacunadorId,
-                CaninoId = filter.CaninoId
+                NombreCanino = filter.NombreCanino
             }));
         }
 
@@ -36,8 +35,8 @@ namespace API.Canina.Controllers.v1
 
         //POST api/<controller>
         [HttpPost]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Moderador")]
+        //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Moderador")]
         public async Task<IActionResult> Post(CreateVacunacionCommand createClientCommand)
         {
             return Ok(await Mediator.Send(createClientCommand));
@@ -54,8 +53,8 @@ namespace API.Canina.Controllers.v1
         }
         //DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Moderador")]
+        //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Moderador")]
         public async Task<IActionResult> Delete(Guid id)
         {
 

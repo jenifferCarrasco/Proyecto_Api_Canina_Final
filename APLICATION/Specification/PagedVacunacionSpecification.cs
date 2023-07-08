@@ -1,22 +1,31 @@
 ﻿using Ardalis.Specification;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace APLICATION.Specification
 {
-    public class PagedVacunacionSpecification : Specification<DOMAIN.Canina.Entities.Vacunacion>
-    {
-        public PagedVacunacionSpecification(int pageSize, int pageNumber, Guid canino, Guid vacunador)
-        {
-            Query.Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize);
+	public class PagedVacunacionSpecification : Specification<DOMAIN.Canina.Entities.Vacunacion>
+	{
+		public PagedVacunacionSpecification(int pageSize, int pageNumber, string nombreCanino)
+		{
+			Query.Include(x => x.Canino)
+				.Include(x => x.Vacunador)
+				.Include(x => x.Centro)
+				.Include(x => x.Vacuna);
 
-            if (canino != null)
-                Query.Search(x => Convert.ToString(x.CaninoId), "%" + canino + "%");
-            if (vacunador != null)
-                Query.Search(x => Convert.ToString(x.VacunadorId), "%" + vacunador + "%");
+			Query.Skip((pageNumber - 1) * pageSize)
+				.Take(pageSize);
 
-        }
-    }
+			if (string.IsNullOrEmpty(nombreCanino))
+				Query.Search(x => x.Canino.Nombre, "%" + nombreCanino + "%");
+		}
+
+		public PagedVacunacionSpecification(Guid caninoId)
+		{
+			Query.Include(x => x.Canino)
+				 .Include(x => x.Vacunador)
+				 .Include(x => x.Centro)
+				 .Include(x => x.Vacuna)
+				 .Where(x => x.CaninoId == caninoId);
+		}
+	}
 }

@@ -1,24 +1,44 @@
-﻿using APLICATION.DTOs.User;
-using DOMAIN.Canina.Entities;
+﻿using DOMAIN.Canina.Entities;
+using DOMAIN.Canina.Enum;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace APLICATION.DTOs
 {
-    public class VacunacionesDto
+	public class VacunacionesDto
     {
         public string Id { get; set; }
-        public string CentroId { get; set; }
-        public Centro Centro { get; set; }
-        public string VacunadorId { get; set; }
-        public Vacunador Vacunador { get; set; }
-        public string VacunaId { get; set; }
-        public Vacuna Vacuna { get; set; }
-        public string CaninoId { get; set; }
-        public Canino Canino { get; set; }
+        public VacunacionCentroDto Centro { get; set; }
+        public VacunacionVacunadorDto Vacunador { get; set; }
+        public VacunacionVacunaDto Vacuna { get; set; }
+        public VacunacionCaninoDto Canino { get; set; }
         public string Dosis { get; set; }
         public DateTime FechaProxima { get; set; }
     }
+
+    public class VacunacionCentroDto
+    {
+        public string Id { get; set; }
+		public string Nombre { get; set; }
+		public string Direccion { get; set; }
+	}
+    public class VacunacionVacunadorDto
+    {
+        public string Id { get; set; }
+		public string Nombre { get; set; }
+	}
+    public class VacunacionVacunaDto
+    {
+        public string Id { get; set; }
+		public string Nombre { get; set; }
+		public string Descripcion { get; set; }
+		public string Lote { get; set; }
+	}
+    public class VacunacionCaninoDto
+    {
+        public string Id { get; set; }
+		public string Nombre { get; set; }
+		public string Raza { get; set; }
+		public string Color { get; set; }
+		public DateTime FechaNacimiento { get; set; }
+	}
 }
