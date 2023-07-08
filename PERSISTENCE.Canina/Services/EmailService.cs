@@ -18,7 +18,7 @@ namespace PERSISTENCE.Canina.Services
 			string apikey = _configuration.GetValue<string>("SendGridKey");
 			var sendGridClient = new SendGridClient(apikey);
 
-			var from = new EmailAddress("jeysom@live.com", "Notificaciones");
+			var from = new EmailAddress("rddogapp@gmail.com", "Notificaciones");
 			var toEmailAddress = new EmailAddress(to);
 			var plainTextContent = "text/html";
 			var msg = MailHelper.CreateSingleEmail(from, toEmailAddress, subject, plainTextContent, htmlContent);
