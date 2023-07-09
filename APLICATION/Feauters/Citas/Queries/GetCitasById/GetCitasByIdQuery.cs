@@ -3,6 +3,7 @@ using APLICATION.Specification;
 using APLICATION.Wrappers;
 using Application.Interface;
 using AutoMapper;
+using DOMAIN.Canina.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace APLICATION.Feauters.Citas.Queries.GetCitasById
 		public class GetCitasByIdQueryHandler : IRequestHandler<GetCitasByIdQuery, Response<CitasDto>>
 		{
 
-			private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Cita> _repositoryAsync;
+			private readonly IRepositoryAsync<Cita> _repositoryAsync;
 			private readonly IMapper _mapper;
 
 			public GetCitasByIdQueryHandler(IRepositoryAsync<DOMAIN.Canina.Entities.Cita> repositoryAsync, IMapper mapper)

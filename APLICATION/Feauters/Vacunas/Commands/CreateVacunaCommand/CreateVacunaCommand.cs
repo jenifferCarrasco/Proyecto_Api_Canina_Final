@@ -40,6 +40,11 @@ namespace APLICATION.Feauters.Vacunas.Commands.CreateVacunaCommand
 			{
 				newRegister.VacunaInventario.CantidadIngresada = request.Cantidad;
 				newRegister.VacunaInventario.CantidadDisponible = request.Cantidad;
+				newRegister.Estatus = DOMAIN.Canina.Estados.Activo;
+			}
+			else
+			{
+				newRegister.Estatus = DOMAIN.Canina.Estados.Inactivo;
 			}
 
 			var loteIgual = (await _repositoryAsync.ListAsync())

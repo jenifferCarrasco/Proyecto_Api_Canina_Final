@@ -6,6 +6,7 @@ using APLICATION.Feauters.Citas.Queries.GetAllCitas;
 using APLICATION.Feauters.Citas.Queries.GetCitasById;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Threading.Tasks;
 
@@ -52,6 +53,7 @@ namespace API.Canina.Controllers.v1
 				return BadRequest();
 			return Ok(await Mediator.Send(updateClientCommand));
 		}
+		[SwaggerOperation(Summary = "All Users: Crear Centro")]
 
 		[HttpPut("Desactivar/{id}")]
 		public async Task<IActionResult> Desactivar(Guid id)
@@ -62,13 +64,10 @@ namespace API.Canina.Controllers.v1
 			}));
 		}
 
-		//DELETE api/<controller>/5
 		[HttpDelete("{id}")]
-		//[Authorize(Roles = "Admin")]
-		//[Authorize(Roles = "Moderador")]
+		[SwaggerOperation(Summary = "Only Propietario: Eliminar Cita")]
 		public async Task<IActionResult> Delete(Guid id)
 		{
-
 			return Ok(await Mediator.Send(new DeleteCitasCommand { Id = id }));
 		}
 	}

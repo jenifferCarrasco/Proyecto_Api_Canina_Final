@@ -5,6 +5,7 @@ using APLICATION.Feauters.Authenticate.Command.RegisterAdminCommand;
 using APLICATION.Feauters.Authenticate.Command.RegisterPropietarioCommand;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Threading.Tasks;
 
 namespace API.Canina.Controllers
@@ -14,6 +15,7 @@ namespace API.Canina.Controllers
 	public class AccountController : BaseApiController
 	{
 		[HttpPost("Login")]
+		[SwaggerOperation(Summary = "All Users: Inicio de sesion")]
 		public async Task<IActionResult> AuthenticateAsync(AuthenticationRequest request)
 		{
 			return Ok(await Mediator.Send(new AuthenticateCommand
@@ -25,6 +27,7 @@ namespace API.Canina.Controllers
 		}
 
 		[HttpPost("Administrador")]
+		[SwaggerOperation(Summary = "Only Administradores: Crear Usuario")]
 		public async Task<IActionResult> RegisterAdminAsync(RegisterAdminRequest request)
 		{
 			return Ok(await Mediator.Send(new RegisterAdminCommand
@@ -40,6 +43,7 @@ namespace API.Canina.Controllers
 		}
 
 		[HttpPost("Propietario")]
+		[SwaggerOperation(Summary = "Only Propietario: Crear Usuario")]
 		public async Task<IActionResult> RegisterPropietarioAsync(RegisterPropietarioRequest request)
 		{
 			return Ok(await Mediator.Send(new RegisterPropietarioCommand
@@ -58,6 +62,7 @@ namespace API.Canina.Controllers
 		}
 
 		[HttpPost("RecuperarContrasena")]
+		[SwaggerOperation(Summary = "All Users: Recuperar contrasena")]
 		public async Task<IActionResult> RegisterPropietarioAsync(PasswordRecoveryCommand command)
 		{
 			return Ok(await Mediator.Send(command));

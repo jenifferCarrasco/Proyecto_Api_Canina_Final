@@ -32,23 +32,23 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.UpdateVacunacionCommand
 
         public async Task<Response<Guid>> Handle(UpdateVacunacionCommand request, CancellationToken cancellationToken)
         {
-            var client = await _repositoryAsync.GetByIdAsync(request.Id);
-            if (client == null)
+            var vacunacion = await _repositoryAsync.GetByIdAsync(request.Id);
+            if (vacunacion == null)
             {
                 throw new KeyNotFoundException($"Registro no encontrado con el id {request.Id}");
             }
             else {
 
-                client.CentroId = request.CentroId;
-                client.CaninoId = request.CaninoId;
-                client.VacunaId = request.VacunaId;
-                client.VacunadorId = request.VacunadorId;
-                client.Dosis = request.Dosis;
-                client.FechaProxima = request.FechaProxima;
+                vacunacion.CentroId = request.CentroId;
+                vacunacion.CaninoId = request.CaninoId;
+                vacunacion.VacunaId = request.VacunaId;
+                vacunacion.VacunadorId = request.VacunadorId;
+                vacunacion.Dosis = request.Dosis;
+                vacunacion.FechaProxima = request.FechaProxima;
 
-                await _repositoryAsync.UpdateAsync(client);
+                await _repositoryAsync.UpdateAsync(vacunacion);
 
-                return new Response<Guid>(client.Id);
+                return new Response<Guid>(vacunacion.Id);
             }
         }
     }

@@ -22,10 +22,12 @@ namespace APLICATION.Feauters.Vacunas.Commands.UpdateInventarioCommand
 	{
 
 		private readonly IRepositoryAsync<Inventario> _repositoryAsync;
+		private readonly IRepositoryAsync<Vacuna> _vacunarepository;
 
-		public UpdateInventarioCommandHandler(IRepositoryAsync<Inventario> repositoryAsync)
+		public UpdateInventarioCommandHandler(IRepositoryAsync<Inventario> repositoryAsync, IRepositoryAsync<Vacuna> vacunarepository)
 		{
 			_repositoryAsync = repositoryAsync;
+			_vacunarepository = vacunarepository;
 		}
 
 		public async Task<Response<Guid>> Handle(UpdateInventarioCommand request, CancellationToken cancellationToken)
@@ -48,6 +50,15 @@ namespace APLICATION.Feauters.Vacunas.Commands.UpdateInventarioCommand
 
 				inventario.CantidadIngresada -= request.Cantidad;
 				inventario.CantidadDisponible -= request.Cantidad;
+			}
+
+			if (inventario.CantidadDisponible == 0)
+			{
+				var vacuna = (await _vacunarepository.ListAsync())
+				.Where(x => x.Id == request.Id).FirstOrDefault();
+
+				vacuna.Estatus = DOMAIN.Canina.Estados.Inactivo;
+				await _vacunarepository.UpdateAsync(vacuna, cancellationToken);
 			}
 
 			await _repositoryAsync.UpdateAsync(inventario, cancellationToken);

@@ -21,5 +21,14 @@ namespace APLICATION.Specification
 			//    Query.Search(x => x.Laboratorio, "%" + lab + "%");
 
 		}
+
+		public PagedVacunaSpecification(string nombre)
+		{
+			Query.Include(X => X.VacunaInventario);
+
+			if (!string.IsNullOrEmpty(nombre))
+				Query.Search(x => x.Nombre, "%" + nombre + "%");
+
+		}
 	}
 }

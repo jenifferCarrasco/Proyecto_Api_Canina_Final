@@ -1,4 +1,6 @@
-﻿namespace APLICATION.DTOs
+﻿using DOMAIN.Canina.Enum;
+
+namespace APLICATION.DTOs
 {
 	public class VacunadoresDto
     {
@@ -8,5 +10,6 @@
         public string Cedula { get; set; }
         public string Direccion { get; set; }
         public string Telefono { get; set; }
-    }
+		public Generos Sexo { get; set; }
+	}
 }

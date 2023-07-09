@@ -2,6 +2,7 @@
 using Application.Interface;
 using AutoMapper;
 using DOMAIN.Canina.Entities;
+using DOMAIN.Canina.Enum;
 using MediatR;
 using System;
 using System.Threading;
@@ -14,10 +15,9 @@ namespace APLICATION.Feauters.Vacunadores.Commands.CreateCommand
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Cedula { get; set; }
-        public string Direccion { get; set; }
+		public Generos Sexo { get; set; }
+		public string Direccion { get; set; }
         public string Telefono { get; set; }
-
-
     }
     public class CreateVacunadoresCommandHandler : IRequestHandler<CreateVacunadoresCommand, Response<Guid>>
     {
@@ -30,7 +30,6 @@ namespace APLICATION.Feauters.Vacunadores.Commands.CreateCommand
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;
         }
-
 
         public async Task<Response<Guid>> Handle(CreateVacunadoresCommand request, CancellationToken cancellationToken)
         {

@@ -9,11 +9,12 @@ namespace APLICATION.Specification
 	{
 		public PagedCitaSpecification(int pageNumber, int pageSize, string centro)
 		{
-			Query.Where(x => x.Estatus == Estados.Activo)
+			Query
 				.Include(x => x.Canino)
 				.Include(x => x.Centro)
 				.Include(x => x.Vacunador)
 				.Include(x => x.Propietario);
+				//Where(x => x.Estatus == Estados.Activo)
 
 			Query.Skip((pageNumber - 1) * pageSize)
 				.Take(pageSize);

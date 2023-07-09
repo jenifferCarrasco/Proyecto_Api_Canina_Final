@@ -29,20 +29,20 @@ namespace APLICATION.Feauters.Centros.Commands.UpdateCentroCommand
 
         public async Task<Response<Guid>> Handle(UpdateCentroCommand request, CancellationToken cancellationToken)
         {
-            var client = await _repositoryAsync.GetByIdAsync(request.Id);
-            if (client == null)
+            var centro = await _repositoryAsync.GetByIdAsync(request.Id);
+            if (centro == null)
             {
                 throw new KeyNotFoundException($"Registro no encontrado con el id {request.Id}");
             }
             else
             {
-                client.Nombre = request.Nombre;
-                client.Direccion = request.Direccion;
-                client.Estatus = request.Estatus;
+                centro.Nombre = request.Nombre;
+                centro.Direccion = request.Direccion;
+                centro.Estatus = request.Estatus;
 
-                await _repositoryAsync.UpdateAsync(client);
+                await _repositoryAsync.UpdateAsync(centro);
 
-                return new Response<Guid>(client.Id);
+                return new Response<Guid>(centro.Id);
             }
         }
     }

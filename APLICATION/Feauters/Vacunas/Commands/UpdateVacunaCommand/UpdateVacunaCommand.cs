@@ -17,11 +17,7 @@ namespace APLICATION.Feauters.Vacunas.Commands.UpdateVacunaCommand
         public Guid Id { get; set; }
         public string Nombre { get; set; }
         public string Laboratorio { get; set; }
-        public string Descripcion { get; set; }
-        //public DateTime FechaCaducidad { get; set; }
-        //public string Lote { get; set; }
-        //public DOMAIN.Canina.Estados Estatus { get; set; }
-        
+        public string Descripcion { get; set; }     
 
     }
     public class UpdateVacunaCommandHandler : IRequestHandler<UpdateVacunaCommand, Response<Guid>>
@@ -48,9 +44,6 @@ namespace APLICATION.Feauters.Vacunas.Commands.UpdateVacunaCommand
                 client.Nombre = request.Nombre;
                 client.Laboratorio = request.Laboratorio;
                 client.Descripcion = request.Descripcion;
-                //client.Lote = request.Lote;
-                //client.FechaCaducidad = request.FechaCaducidad;
-                //client.Estatus = request.Estatus;
 
                 await _repositoryAsync.UpdateAsync(client);
 

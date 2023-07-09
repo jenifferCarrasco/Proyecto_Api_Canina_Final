@@ -30,6 +30,7 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.CreateVacunacionCommand
 		private readonly IRepositoryAsync<DOMAIN.Canina.Entities.Canino> _caninoRepositoryAsync;
 		private readonly IRepositoryAsync<Vacunador> _vacunadorRepositoryAsync;
 		private readonly IRepositoryAsync<Centro> _centroRepositoryAsync;
+		private readonly IRepositoryAsync<Vacuna> _vacunaRepositoryAsync;
 
 		private readonly IMapper _mapper;
 
@@ -38,7 +39,8 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.CreateVacunacionCommand
 			IRepositoryAsync<DOMAIN.Canina.Entities.Canino> caninoRepositoryAsync = null,
 			IRepositoryAsync<Vacunacion> vacunacionRepositoryAsync = null,
 			IRepositoryAsync<Vacunador> vacunadorRepositoryAsync = null,
-			IRepositoryAsync<Centro> centroRepositoryAsync = null)
+			IRepositoryAsync<Centro> centroRepositoryAsync = null,
+			IRepositoryAsync<Vacuna> vacunaRepositoryAsync = null)
 		{
 			_mapper = mapper;
 			_inventarioRepositoryAsync = inventarioRepositoryAsync;
@@ -46,6 +48,7 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.CreateVacunacionCommand
 			_vacunacionRepositoryAsync = vacunacionRepositoryAsync;
 			_vacunadorRepositoryAsync = vacunadorRepositoryAsync;
 			_centroRepositoryAsync = centroRepositoryAsync;
+			_vacunaRepositoryAsync = vacunaRepositoryAsync;
 		}
 
 
@@ -57,7 +60,7 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.CreateVacunacionCommand
 				.Where(x => x.VacunaId == request.VacunaId).FirstOrDefault() ??
 				throw new KeyNotFoundException($"Vacuna no encontrada con el id {request.VacunaId}");
 
-			if (inventario.CantidadDisponible < 0) throw new ApiException($"Esta vacuna no esta disponible");
+			if (inventario.CantidadDisponible < 1) throw new ApiException($"Esta vacuna no esta disponible");
 
 			inventario.CantidadDisponible--;
 			inventario.CantidadUtilizada++;
@@ -82,6 +85,15 @@ namespace APLICATION.Feauters.Vacunaciones.Commands.CreateVacunacionCommand
 				.FirstOrDefault();
 
 			if (vacunacion != null) throw new ApiException($"Ya este canino tiene esta vacuna");
+
+			if (inventario.CantidadDisponible == 0)
+			{
+				var vacuna = (await _vacunaRepositoryAsync.ListAsync())
+				.Where(x => x.Id == request.VacunaId).FirstOrDefault();
+
+				vacuna.Estatus = DOMAIN.Canina.Estados.Inactivo;
+				await _vacunaRepositoryAsync.UpdateAsync(vacuna, cancellationToken);
+			}
 
 			var data = await _vacunacionRepositoryAsync.AddAsync(nuevaVacunacion);
 			await _inventarioRepositoryAsync.UpdateAsync(inventario);

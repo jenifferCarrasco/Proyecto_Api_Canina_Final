@@ -6,6 +6,7 @@ using APLICATION.Feauters.Caninos.Queries.GetAllVacunacionesByCaninoId;
 using APLICATION.Feauters.Caninos.Queries.GetCaninoById;
 using APLICATION.Feauters.Clientes.Commands.DeleteClientCommand;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Threading.Tasks;
 
@@ -15,8 +16,8 @@ namespace API.Canina.Controllers.v1
 	[ApiVersion("1.0")]
 	public class CaninosController : BaseApiController
 	{
-		//Get api/<controller>
 		[HttpGet]
+		[SwaggerOperation(Summary = "Only Administrador: Obtener Caninos")]
 		//[Authorize(Roles = "Admin")]
 		//[Authorize(Roles = "Moderador")]
 		public async Task<IActionResult> GetAll([FromQuery] GetAllCaninoParameter filter)
@@ -31,6 +32,8 @@ namespace API.Canina.Controllers.v1
 		}
 
 		[HttpGet("{caninoId}/Vacunaciones")]
+		[SwaggerOperation(Summary = "Only Propietario: Obtener vacunaciones de un canino")]
+
 		public async Task<IActionResult> GetAllVacunaciones([FromRoute] Guid caninoId)
 		{
 			return Ok(await Mediator.Send(new GetAllVacunacionesByCaninoIdQuery
@@ -39,29 +42,32 @@ namespace API.Canina.Controllers.v1
 			}));
 		}
 
-		//Get api/<controller>/5
 		[HttpGet("{id}")]
+		[SwaggerOperation(Summary = "All Users: Obtener un canino por su id")]
 		public async Task<IActionResult> GetById(Guid id)
 		{
 			return Ok(await Mediator.Send(new GetCaninoByIdQuery { Id = id }));
 		}
 
-		//POST api/<controller>
 		[HttpPost]
+		[SwaggerOperation(Summary = "Only Propietario: Crear Canino")]
 		public async Task<IActionResult> Post(CreateCaninoCommand createClientCommand)
 		{
 			return Ok(await Mediator.Send(createClientCommand));
 		}
-		//PUT api/<controller>/5
+
 		[HttpPut("{id}")]
+		[SwaggerOperation(Summary = "Only Propietario: Actualizar canino")]
+
 		public async Task<IActionResult> Put(Guid id, UpdateCaninoCommand updateClientCommand)
 		{
 			if (id != updateClientCommand.Id)
 				return BadRequest();
 			return Ok(await Mediator.Send(updateClientCommand));
 		}
-		//DELETE api/<controller>/5
+
 		[HttpDelete("{id}")]
+		[SwaggerOperation(Summary = "Only Propietario: Eliminar Canino")]
 		public async Task<IActionResult> Delete(Guid id)
 		{
 			return Ok(await Mediator.Send(new DeleteCaninoCommand { Id = id }));

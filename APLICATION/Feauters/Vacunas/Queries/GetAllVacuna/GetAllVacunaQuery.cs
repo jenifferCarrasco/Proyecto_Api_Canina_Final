@@ -11,13 +11,11 @@ using System.Threading.Tasks;
 
 namespace APLICATION.Feauters.Vacunas.Queries.GetAllVacuna
 {
-	public class GetAllVacunaQuery : IRequest<PagedResponse<List<VacunasDto>>>
+	public class GetAllVacunaQuery : IRequest<Response<List<VacunasDto>>>
 	{
-		public int PageNumber { get; set; }
-		public int PageSize { get; set; }
 		public string Nombre { get; set; }
 
-		public class GetAllVacunaQueryHandler : IRequestHandler<GetAllVacunaQuery, PagedResponse<List<VacunasDto>>>
+		public class GetAllVacunaQueryHandler : IRequestHandler<GetAllVacunaQuery, Response<List<VacunasDto>>>
 		{
 			private readonly IRepositoryAsync<Vacuna> _repositoryAsync;
 			private readonly IMapper _mapper;
@@ -28,16 +26,13 @@ namespace APLICATION.Feauters.Vacunas.Queries.GetAllVacuna
 				_mapper = mapper;
 			}
 
-			public async Task<PagedResponse<List<VacunasDto>>> Handle(GetAllVacunaQuery request, CancellationToken cancellationToken)
+			public async Task<Response<List<VacunasDto>>> Handle(GetAllVacunaQuery request, CancellationToken cancellationToken)
 			{
-
 				var vacunas = await _repositoryAsync.ListAsync(
-					new PagedVacunaSpecification(
-					request.PageSize, request.PageNumber, request.Nombre));
+					new PagedVacunaSpecification(request.Nombre));
 
-				var clientdto = _mapper.Map<List<VacunasDto>>(vacunas);
-				return new PagedResponse<List<VacunasDto>>(clientdto, request.PageNumber
-					, request.PageSize);
+				var vacunasDto = _mapper.Map<List<VacunasDto>>(vacunas);
+				return new Response<List<VacunasDto>>(vacunasDto);
 			}
 		}
 	}

@@ -1,4 +1,6 @@
-﻿namespace APLICATION.DTOs
+﻿using DOMAIN.Canina;
+
+namespace APLICATION.DTOs
 {
 	public class VacunasDto
     {
@@ -7,5 +9,6 @@
 		public string Laboratorio { get; set; }
 		public string Descripcion { get; set; }
 		public int CantidadDisponible { get; set; }
+		public Estados Estado { get; set; }
 	}
 }

@@ -3,6 +3,7 @@ using APLICATION.Feauters.Propietarios.Queries.GetAllPropietario;
 using APLICATION.Feauters.Propietarios.Queries.GetCaninosByPropietarioId;
 using APLICATION.Feauters.Propietarios.Queries.GetPropietarioById;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Threading.Tasks;
 
@@ -12,9 +13,9 @@ namespace API.Canina.Controllers.v1
 	[ApiVersion("1.0")]
     public class PropietariosController : BaseApiController
     {
-        //Get api/<controller>
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] GetAllPropietarioParameter filter)
+		[SwaggerOperation(Summary = "Only Administrador: Obtener Propietarios")]
+		public async Task<IActionResult> GetAll([FromQuery] GetAllPropietarioParameter filter)
         {
             return Ok(await Mediator.Send(new GetAllPropietarioQuery
             {
@@ -25,14 +26,16 @@ namespace API.Canina.Controllers.v1
             }));
         }
 
-        //Get api/<controller>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+		[SwaggerOperation(Summary = "Only Propietario: Obtener Perfil de propietario")]
+		public async Task<IActionResult> GetById(Guid id)
         {
             return Ok(await Mediator.Send(new GetPropietarioByIdQuery { Id = id }));
         }
 
+
 		[HttpGet("{propietarioId}/Caninos")]
+		[SwaggerOperation(Summary = "Only Propietario: Obtener caninos de propietario")]
 		public async Task<IActionResult> GetCaninosByPropietarioId(Guid propietarioId)
 		{
 			return Ok(await Mediator.Send(new GetCaninosByPropietarioIdQuery
@@ -42,6 +45,8 @@ namespace API.Canina.Controllers.v1
 		}
 
 		[HttpGet("{propietarioId}/Citas")]
+		[SwaggerOperation(Summary = "Only Propietario: Obtener citas de propietario")]
+
 		public async Task<IActionResult> GetCitasByPropietarioId(Guid propietarioId)
 		{
 			return Ok(await Mediator.Send(new GetCitasByPropietarioIdQuery

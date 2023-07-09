@@ -11,15 +11,10 @@ using System.Threading.Tasks;
 
 namespace APLICATION.Feauters.Centros.Queries.GetAllCentro
 {
-
-	public class GetAllCentroQuery : IRequest<PagedResponse<List<CentrosDto>>>
+	public class GetAllCentroQuery : IRequest<Response<List<CentrosDto>>>
 	{
-		public int PageNumber { get; set; }
-		public int PageSize { get; set; }
 		public string Nombre { get; set; }
-
-
-		public class GetAllCentroQueryHandler : IRequestHandler<GetAllCentroQuery, PagedResponse<List<CentrosDto>>>
+		public class GetAllCentroQueryHandler : IRequestHandler<GetAllCentroQuery, Response<List<CentrosDto>>>
 		{
 			private readonly IRepositoryAsync<Centro> _repositoryAsync;
 			private readonly IMapper _mapper;
@@ -30,17 +25,13 @@ namespace APLICATION.Feauters.Centros.Queries.GetAllCentro
 				_mapper = mapper;
 			}
 
-
-			public async Task<PagedResponse<List<CentrosDto>>> Handle(GetAllCentroQuery request, CancellationToken cancellationToken)
+			public async Task<Response<List<CentrosDto>>> Handle(GetAllCentroQuery request, CancellationToken cancellationToken)
 			{
-
 				var centros = await _repositoryAsync.ListAsync(new PagedCentroSpecification(
-					request.PageSize,
-					request.PageNumber,
 					request.Nombre));
 
-				var clientdto = _mapper.Map<List<CentrosDto>>(centros);
-				return new PagedResponse<List<CentrosDto>>(clientdto, request.PageNumber, request.PageSize);
+				var centrosDto = _mapper.Map<List<CentrosDto>>(centros);
+				return new Response<List<CentrosDto>>(centrosDto);
 			}
 		}
 	}

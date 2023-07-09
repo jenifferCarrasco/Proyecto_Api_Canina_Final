@@ -5,6 +5,7 @@ using APLICATION.Feauters.Vacunaciones.Queries.GetAllVacunacion;
 using APLICATION.Feauters.Vacunaciones.Queries.GetVacunacionById;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Threading.Tasks;
 
@@ -14,9 +15,10 @@ namespace API.Canina.Controllers.v1
 	[ApiVersion("1.0")]
     public class VacunacionesController : BaseApiController
     {
-        //Get api/<controller>
-        [HttpGet()]
-        public async Task<IActionResult> GetAll([FromQuery] GetAllVacunacionParameter filter)
+        
+        [HttpGet]
+		[SwaggerOperation(Summary = "Only Administrador: Obtener vacunaciones")]
+		public async Task<IActionResult> GetAll([FromQuery] GetAllVacunacionParameter filter)
         {
             return Ok(await Mediator.Send(new GetAllVacunacionQuery
             {
@@ -33,19 +35,16 @@ namespace API.Canina.Controllers.v1
             return Ok(await Mediator.Send(new GetVacunacionByIdQuery { Id = id }));
         }
 
-        //POST api/<controller>
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
-        //[Authorize(Roles = "Moderador")]
-        public async Task<IActionResult> Post(CreateVacunacionCommand createClientCommand)
+		[SwaggerOperation(Summary = "Only Administrador: Crear Vacunacion")]
+		public async Task<IActionResult> Post(CreateVacunacionCommand createClientCommand)
         {
             return Ok(await Mediator.Send(createClientCommand));
         }
         //PUT api/<controller>/5
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Moderador")]
-        public async Task<IActionResult> Put(Guid id, UpdateVacunacionCommand updateClientCommand)
+		[SwaggerOperation(Summary = "Only Administrador: Actualizar Vacunacion")]
+		public async Task<IActionResult> Put(Guid id, UpdateVacunacionCommand updateClientCommand)
         {
             if (id != updateClientCommand.Id)
                 return BadRequest();
@@ -53,9 +52,8 @@ namespace API.Canina.Controllers.v1
         }
         //DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Admin")]
-        //[Authorize(Roles = "Moderador")]
-        public async Task<IActionResult> Delete(Guid id)
+		[SwaggerOperation(Summary = "Only Administrador: Eliminar Vacunacion")]
+		public async Task<IActionResult> Delete(Guid id)
         {
 
             return Ok(await Mediator.Send(new DeleteVacunacionCommand { Id = id }));

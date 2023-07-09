@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DOMAIN.Canina;
 using DOMAIN.Canina.Entities;
+using DOMAIN.Canina.Enum;
 
 namespace APLICATION.Feauters.Vacunadores.Commands.UpdateCommand
 {
@@ -19,9 +20,9 @@ namespace APLICATION.Feauters.Vacunadores.Commands.UpdateCommand
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Cedula { get; set; }
-        public string Direccion { get; set; }
+		public Generos Sexo { get; set; }
+		public string Direccion { get; set; }
         public string Telefono { get; set; }
-      
 
     }
     public class UpdateVacunadoresCommandHandler : IRequestHandler<UpdateVacunadoresCommand, Response<Guid>>
@@ -39,23 +40,24 @@ namespace APLICATION.Feauters.Vacunadores.Commands.UpdateCommand
 
         public async Task<Response<Guid>> Handle(UpdateVacunadoresCommand request, CancellationToken cancellationToken)
         {
-            var client = await _repositoryAsync.GetByIdAsync(request.Id);
-            if (client == null)
+            var vacunador = await _repositoryAsync.GetByIdAsync(request.Id);
+            if (vacunador == null)
             {
                 throw new KeyNotFoundException($"Registro no encontrado con el id {request.Id}");
             }
             else
             {
-                client.Nombre = request.Nombre;
-                client.Apellido = request.Apellido;
-                client.Cedula = request.Cedula;
-                client.Telefono = request.Telefono;
-                client.Direccion = request.Direccion;
+                vacunador.Nombre = request.Nombre;
+                vacunador.Apellido = request.Apellido;
+                vacunador.Cedula = request.Cedula;
+                vacunador.Telefono = request.Telefono;
+                vacunador.Direccion = request.Direccion;
+                vacunador.Sexo = request.Sexo;
 
 
-                await _repositoryAsync.UpdateAsync(client);
+                await _repositoryAsync.UpdateAsync(vacunador);
 
-                return new Response<Guid>(client.Id);
+                return new Response<Guid>(vacunador.Id);
             }
         }
     }

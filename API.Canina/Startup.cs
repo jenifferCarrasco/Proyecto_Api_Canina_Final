@@ -44,6 +44,7 @@ namespace API.Canina
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api_Canina", Version = "v1" });
+				c.EnableAnnotations();
 			});
 		}
 
